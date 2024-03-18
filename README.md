@@ -1,1 +1,1 @@
-#  Fantasy Based Clicker Game 
+#  Fantasy Texxt-Based, Clicker, and Observation Game 
