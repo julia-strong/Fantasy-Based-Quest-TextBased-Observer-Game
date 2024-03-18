@@ -1,1 +1,1 @@
-#  Fantasy Texxt-Based, Clicker, and Observation Game 
+#  Fantasy Text-Based, Clicker, and Observation Game 
