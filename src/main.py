@@ -6,8 +6,10 @@
 # win/lose scenarios
 #locations
 #quests
+from graphics import draw_image2
 from graphics import startImage
 from graphics import draw_image1
+from graphics import bookImage
 import time
 import pygame
 
@@ -39,6 +41,7 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if 200 < mouse_x < 400 and 400 < mouse_y < 495:
                 print("Clicked inside the specified area.")
+                draw_image2(bookImage, 1, 1, 0)
 
     pygame.display.flip()
 

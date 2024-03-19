@@ -33,4 +33,24 @@ def draw_image1(startImage, x, y, display_time):
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         running = False
-    
+
+bookImage =pygame.image.load("Book.png").convert()
+def draw_image2(bookImage, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_bookImage = pygame.transform.scale(
+      bookImage, (bookImage.get_width() // 1, bookImage.get_height() // 1))
+  while running:
+    screen.blit(scaled_bookImage, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
