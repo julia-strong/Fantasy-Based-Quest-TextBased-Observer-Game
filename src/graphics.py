@@ -28,7 +28,7 @@ def draw_image1(startImage, x, y, display_time):
 
     current_time = pygame.time.get_ticks()
     if current_time - start_time >= display_time:
-      screen.fill(0)
+      #screen.fill(0)
       running = False
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
