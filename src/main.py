@@ -38,8 +38,6 @@ running = True
 start_time = pygame.time.get_ticks()
 
 if something_was_clicked(200, 400, 400, 495,bookImage):
-  # draw_image2(bookImage, 1, 1, 0)
-  # pygame.display.flip()
   #write intro paragraph 
   print("temporary intro paragraph for information")
   print("click on the bottom right corner of the book to continue")

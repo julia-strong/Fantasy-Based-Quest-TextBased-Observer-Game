@@ -86,5 +86,4 @@ def something_was_clicked(x1,y1,x2,y2,image):
                #print("Clicked inside the specified area.")
                draw_image(image,x,y,0)
                pygame.display.flip()
-               running = False
-              
+               break
