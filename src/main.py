@@ -12,6 +12,7 @@ from graphics import startImage
 from graphics import draw_image1
 from graphics import bookImage
 from graphics import something_was_clicked
+from graphics import testImage
 import time
 import pygame
 
@@ -42,6 +43,6 @@ if something_was_clicked(200, 400, 400, 495,bookImage):
   #write intro paragraph 
   print("temporary intro paragraph for information")
   print("click on the bottom right corner of the book to continue")
-  if something_was_clicked(310, 410, 350, 450,bookImage):
+  if something_was_clicked(310, 410, 350, 450,testImage):
     print("test")
 #pygame.quit()
