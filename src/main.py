@@ -35,7 +35,7 @@ time.sleep(4)
 running = True
 start_time = pygame.time.get_ticks()
 
-if something_was_clicked(200, 400, 400, 495):
+if something_was_clicked(200, 400, 400, 495,bookImage):
   draw_image2(bookImage, 1, 1, 0)
   pygame.display.flip()
 # while running:
