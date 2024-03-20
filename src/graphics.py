@@ -54,3 +54,15 @@ def draw_image2(bookImage, x, y, display_time):
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         running = False
+
+def something_was_clicked(x1,y1,x2,y2):
+  running = True
+  while running:
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if x1 < mouse_x < x2 and y1 < mouse_y < y2:
+               print("Clicked inside the specified area.")
+              #200,400,400,495
