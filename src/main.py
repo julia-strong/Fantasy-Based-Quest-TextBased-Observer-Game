@@ -1,5 +1,6 @@
 #Julia Strong
 #To Do
+#write intro paragraph for line 43
 #implement player/user, npc, and monster stats
 # implement observation where there's location and user has to find something specific such as traps - likely would take intelligence and/or wisdom into consideration
 # final goal
@@ -36,15 +37,11 @@ running = True
 start_time = pygame.time.get_ticks()
 
 if something_was_clicked(200, 400, 400, 495,bookImage):
-  draw_image2(bookImage, 1, 1, 0)
-  pygame.display.flip()
-# while running:
-#     mouse_x, mouse_y = pygame.mouse.get_pos()
-#     for event in pygame.event.get():
-#         if event.type == pygame.QUIT:
-#             running = False
-#         elif event.type == pygame.MOUSEBUTTONDOWN:
-#             if 200 < mouse_x < 400 and 400 < mouse_y < 495:
-#                # print("Clicked inside the specified area.")
-                #draw_image2(bookImage, 1, 1, 0)
+  # draw_image2(bookImage, 1, 1, 0)
+  # pygame.display.flip()
+  #write intro paragraph 
+  print("temporary intro paragraph for information")
+  print("click on the bottom right corner of the book to continue")
+  if something_was_clicked(310, 410, 350, 450,bookImage):
+    print("test")
 #pygame.quit()
