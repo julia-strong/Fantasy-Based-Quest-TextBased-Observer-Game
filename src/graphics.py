@@ -80,18 +80,19 @@ def something_was_clicked(x1, y1, x2, y2, image):
   running = True
   clicked = False
   while running:
-      for event in pygame.event.get():
-          if event.type == pygame.QUIT:
-              running = False
-          elif event.type == pygame.MOUSEBUTTONDOWN:
-              mouse_x, mouse_y = pygame.mouse.get_pos()
-              #print("Mouse position:", mouse_x, mouse_y)  
-              if x1 <= mouse_x <= x2 and y1 <= mouse_y <= y2:
-                  screen.fill(0)
-                  draw_image(image, 1, 1)
-                  clicked = True
-                  print("Clicked within the specified area")  
-                  break  
-      if clicked:
-          break 
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+      elif event.type == pygame.MOUSEBUTTONDOWN:
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        print("Mouse position:", mouse_x, mouse_y)  
+        if x1 <= mouse_x <= x2 and y1 <= mouse_y <= y2:
+          screen.fill(0)
+          draw_image(image, 1, 1)
+          clicked = True
+          print("Clicked within the specified area")  
+          pygame.display.update()
+          break  
+  #if clicked:
+      #break 
   return clicked

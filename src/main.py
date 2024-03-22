@@ -17,7 +17,6 @@ from graphics import firstChoice
 import time
 import pygame
 
-
 pygame.init()
 
 display_width = 500
@@ -39,11 +38,24 @@ time.sleep(4)
 running = True
 start_time = pygame.time.get_ticks()
 
-if something_was_clicked(200, 400, 400, 495,bookImage):
-  #write intro paragraph 
-  print("temporary intro paragraph for information")
-  print("click on the bottom right corner of the book to continue")
-  if something_was_clicked(320, 450, 350, 475,firstChoice):
-    print("test")
-    print("Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey.")
+while running:
+  for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+      running = False
+    elif event.type == pygame.MOUSEBUTTONDOWN:
+      if something_was_clicked(200, 400, 400, 495, bookImage):
+        pygame.display.update()
+        pygame.display.flip()
+        print("temporary intro paragraph for information")
+        print("click on the bottom right corner of the book to continue")
+
+        if something_was_clicked(320, 450, 350, 475, testImage):
+          pygame.display.update()
+          pygame.display.flip()
+          print("test")
+          print(
+              "Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey."
+          )
+
+pygame.display.update()
 #pygame.quit()
