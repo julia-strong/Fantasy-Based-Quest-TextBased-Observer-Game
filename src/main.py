@@ -53,6 +53,10 @@ while running:
         print("temporary intro paragraph for information")
         print("click on the bottom right corner of the book to continue")
         if event.type == pygame.MOUSEBUTTONDOWN and corner_was_clicked(320, 450, 350, 475):
+          x1 = 320
+          x2 = 450
+          y1 = 350
+          y2 = 475
           pygame.display.update()
           pygame.display.flip()
           print("test")
@@ -60,4 +64,5 @@ while running:
               "Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey."
           )
 
+pygame.display.update()
 #pygame.quit()

@@ -111,7 +111,7 @@ def book_was_clicked(x1, y1, x2, y2):
           screen.fill(0)
           draw_image2(bookImage,1,1,0)
           clicked = True
-          print("Clicked within the specified area")  
+          print("Clicked on book")  
           pygame.display.update()
           pygame.display.flip()
           break
@@ -127,12 +127,16 @@ def corner_was_clicked(x1, y1, x2, y2):
       elif event.type == pygame.MOUSEBUTTONDOWN:
         mouse_x, mouse_y = pygame.mouse.get_pos()
         print("Mouse position:", mouse_x, mouse_y)  
+        x1 = 320
+        x2 = 450
+        y1 = 350
+        y2 = 475
         if x1 <= mouse_x <= x2 and y1 <= mouse_y <= y2:
           screen.fill(0)
           screen.blit(firstChoice, (1, 1))
           draw_image3(firstChoice,1,1,0)
           clicked = True
-          print("Clicked within the specified area")  
+          print("Clicked on corner")  
           pygame.display.update()
           pygame.display.flip()
           break
