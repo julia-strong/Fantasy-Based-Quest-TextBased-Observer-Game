@@ -14,6 +14,7 @@ from graphics import bookImage
 from graphics import something_was_clicked
 from graphics import testImage
 from graphics import firstChoice
+from Player import name
 import time
 import pygame
 
@@ -32,7 +33,8 @@ draw_image1(startImage, 1, 1, display_time)
 print(
     "Welcome to the RPG Fantasy Based Game with Text Based, Clicker Game, and Graphics Aspects!"
 )
-print("Click on the book to begin!")
+name = input("What is your character's name?" + "\n")
+print("Welcome," + "\n" + name + "!" + "\n Click on the book to begin!")
 print("")
 time.sleep(4)
 running = True
@@ -42,14 +44,14 @@ while running:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       running = False
-    elif event.type == pygame.MOUSEBUTTONDOWN:
-      if something_was_clicked(200, 400, 400, 495, bookImage):
+    elif event.type == pygame.MOUSEBUTTONDOWN and something_was_clicked(200, 400, 400, 495, bookImage):
+        screen.fill(0)
         pygame.display.update()
         pygame.display.flip()
+        # to do - doesn't seem to work after here
         print("temporary intro paragraph for information")
         print("click on the bottom right corner of the book to continue")
-    elif event.type == pygame.MOUSEBUTTONDOWN:
-        if something_was_clicked(320, 450, 350, 475, testImage):
+        if event.type == pygame.MOUSEBUTTONDOWN and something_was_clicked(320, 450, 350, 475, firstChoice):
           pygame.display.update()
           pygame.display.flip()
           print("test")

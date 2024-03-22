@@ -92,7 +92,5 @@ def something_was_clicked(x1, y1, x2, y2, image):
           clicked = True
           print("Clicked within the specified area")  
           pygame.display.update()
-          break  
-  #if clicked:
-      #break 
+          break
   return clicked
