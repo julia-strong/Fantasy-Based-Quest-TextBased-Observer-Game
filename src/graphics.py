@@ -84,7 +84,7 @@ def draw_image3(firstChoice, x, y, display_time):
   screen = pygame.display.set_mode((display_width, display_height))
   start_time = pygame.time.get_ticks()
   scaled_firstChoice = pygame.transform.scale(
-      firstChoice, (bookImage.get_width() // 1, firstChoice.get_height() // 1))
+      firstChoice, (firstChoice.get_width() // 1, firstChoice.get_height() // 1))
   while running:
     screen.blit(scaled_firstChoice, (x, y))
     pygame.display.flip()
@@ -129,6 +129,7 @@ def corner_was_clicked(x1, y1, x2, y2):
         print("Mouse position:", mouse_x, mouse_y)  
         if x1 <= mouse_x <= x2 and y1 <= mouse_y <= y2:
           screen.fill(0)
+          screen.blit(firstChoice, (1, 1))
           draw_image3(firstChoice,1,1,0)
           clicked = True
           print("Clicked within the specified area")  

@@ -50,7 +50,6 @@ while running:
     elif event.type == pygame.MOUSEBUTTONDOWN and book_was_clicked(200, 400, 400, 495):
         pygame.display.update()
         pygame.display.flip()
-        # to do - doesn't seem to work after here
         print("temporary intro paragraph for information")
         print("click on the bottom right corner of the book to continue")
         if event.type == pygame.MOUSEBUTTONDOWN and corner_was_clicked(320, 450, 350, 475):
@@ -61,5 +60,4 @@ while running:
               "Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey."
           )
 
-pygame.display.update()
 #pygame.quit()
