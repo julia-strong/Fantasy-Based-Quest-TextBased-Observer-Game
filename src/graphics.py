@@ -55,7 +55,7 @@ def draw_image1(startImage, x, y, display_time):
       if event.type == pygame.QUIT:
         running = False
 
-bookImage =pygame.image.load("Book.png").convert()
+bookImage = pygame.image.load("Book.png").convert()
 def draw_image2(bookImage, x, y, display_time):
   running = True
   display_width = 500
@@ -76,7 +76,28 @@ def draw_image2(bookImage, x, y, display_time):
       if event.type == pygame.QUIT:
         running = False
 
-def something_was_clicked(x1, y1, x2, y2, image):
+firstChoice = pygame.image.load("firstChoice.png").convert()
+def draw_image3(firstChoice, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_firstChoice = pygame.transform.scale(
+      firstChoice, (bookImage.get_width() // 1, firstChoice.get_height() // 1))
+  while running:
+    screen.blit(scaled_firstChoice, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def book_was_clicked(x1, y1, x2, y2):
   running = True
   clicked = False
   while running:
@@ -88,9 +109,30 @@ def something_was_clicked(x1, y1, x2, y2, image):
         print("Mouse position:", mouse_x, mouse_y)  
         if x1 <= mouse_x <= x2 and y1 <= mouse_y <= y2:
           screen.fill(0)
-          draw_image(image, 1, 1)
+          draw_image2(bookImage,1,1,0)
           clicked = True
           print("Clicked within the specified area")  
           pygame.display.update()
+          pygame.display.flip()
+          break
+  return clicked
+
+def corner_was_clicked(x1, y1, x2, y2):
+  running = True
+  clicked = False
+  while running:
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+      elif event.type == pygame.MOUSEBUTTONDOWN:
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        print("Mouse position:", mouse_x, mouse_y)  
+        if x1 <= mouse_x <= x2 and y1 <= mouse_y <= y2:
+          screen.fill(0)
+          draw_image3(firstChoice,1,1,0)
+          clicked = True
+          print("Clicked within the specified area")  
+          pygame.display.update()
+          pygame.display.flip()
           break
   return clicked

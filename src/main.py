@@ -8,10 +8,13 @@
 #locations
 #quests
 from graphics import draw_image2
+from graphics import draw_image3
+from graphics import book_was_clicked
+from graphics import corner_was_clicked
 from graphics import startImage
 from graphics import draw_image1
 from graphics import bookImage
-from graphics import something_was_clicked
+#from graphics import something_was_clicked
 from graphics import testImage
 from graphics import firstChoice
 from Player import name
@@ -44,14 +47,13 @@ while running:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       running = False
-    elif event.type == pygame.MOUSEBUTTONDOWN and something_was_clicked(200, 400, 400, 495, bookImage):
-        screen.fill(0)
+    elif event.type == pygame.MOUSEBUTTONDOWN and book_was_clicked(200, 400, 400, 495):
         pygame.display.update()
         pygame.display.flip()
         # to do - doesn't seem to work after here
         print("temporary intro paragraph for information")
         print("click on the bottom right corner of the book to continue")
-        if event.type == pygame.MOUSEBUTTONDOWN and something_was_clicked(320, 450, 350, 475, firstChoice):
+        if event.type == pygame.MOUSEBUTTONDOWN and corner_was_clicked(320, 450, 350, 475):
           pygame.display.update()
           pygame.display.flip()
           print("test")
