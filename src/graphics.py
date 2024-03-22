@@ -11,6 +11,7 @@ screen = pygame.display.set_mode((display_width, display_height))
 clock = pygame.time.Clock()
 startImage = pygame.image.load("startImage.png").convert()
 testImage = pygame.image.load("testImage.png").convert()
+firstChoice = pygame.image.load("firstChoice.png").convert()
 pygame.display.set_caption("RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 surface1 = pygame.Surface((display_width, display_height))
 
@@ -84,7 +85,7 @@ def something_was_clicked(x1, y1, x2, y2, image):
               running = False
           elif event.type == pygame.MOUSEBUTTONDOWN:
               mouse_x, mouse_y = pygame.mouse.get_pos()
-              print("Mouse position:", mouse_x, mouse_y)  
+              #print("Mouse position:", mouse_x, mouse_y)  
               if x1 <= mouse_x <= x2 and y1 <= mouse_y <= y2:
                   screen.fill(0)
                   draw_image(image, 1, 1)

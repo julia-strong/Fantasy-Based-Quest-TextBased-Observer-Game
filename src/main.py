@@ -13,8 +13,10 @@ from graphics import draw_image1
 from graphics import bookImage
 from graphics import something_was_clicked
 from graphics import testImage
+from graphics import firstChoice
 import time
 import pygame
+
 
 pygame.init()
 
@@ -41,6 +43,7 @@ if something_was_clicked(200, 400, 400, 495,bookImage):
   #write intro paragraph 
   print("temporary intro paragraph for information")
   print("click on the bottom right corner of the book to continue")
-  if something_was_clicked(320, 450, 350, 475,testImage):
+  if something_was_clicked(320, 450, 350, 475,firstChoice):
     print("test")
+    print("Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey.")
 #pygame.quit()
