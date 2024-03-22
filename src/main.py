@@ -48,7 +48,7 @@ while running:
         pygame.display.flip()
         print("temporary intro paragraph for information")
         print("click on the bottom right corner of the book to continue")
-
+    elif event.type == pygame.MOUSEBUTTONDOWN:
         if something_was_clicked(320, 450, 350, 475, testImage):
           pygame.display.update()
           pygame.display.flip()
