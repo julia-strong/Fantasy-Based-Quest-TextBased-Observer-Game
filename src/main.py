@@ -41,6 +41,6 @@ if something_was_clicked(200, 400, 400, 495,bookImage):
   #write intro paragraph 
   print("temporary intro paragraph for information")
   print("click on the bottom right corner of the book to continue")
-  if something_was_clicked(310, 410, 350, 450,testImage):
+  if something_was_clicked(320, 450, 350, 475,testImage):
     print("test")
 #pygame.quit()
