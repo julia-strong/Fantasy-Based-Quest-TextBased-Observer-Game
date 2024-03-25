@@ -15,3 +15,4 @@
 ![Result of User clicking book](https://github.com/julia-strong/RPG-Fantasy-Based-Clicker-and-TextBased-Game/blob/main/images/secondScreen.png?raw=True)
 ## Link to Replit:
 [Link to replit](https://replit.com/@9652160/RPG-Fantasy-DandD-Based-Game)
+### Instructions for Downloading: 
