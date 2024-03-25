@@ -33,6 +33,7 @@ print(
     "Welcome to the RPG Fantasy Based Game with Text Based, Clicker Game, and Graphics Aspects!"
 )
 name = input("What is your character's name?" + "\n")
+print(name)
 print("Welcome," + "\n" + name + "!" + "\n" + "Click on the book to begin!")
 print("")
 running = True
@@ -53,7 +54,7 @@ while running:
           intro_printed = True
         if isClicked(340, 450, 350, 490):
           print("\n" + "clicked on corner")
-          screen.fill(0)
+          # screen.fill(0)
           draw_image3(firstChoice, 2, 2, 0)
           # pygame.display.update()
           # pygame.display.flip()

@@ -12,6 +12,7 @@ clock = pygame.time.Clock()
 startImage = pygame.image.load("startImage.png").convert()
 testImage = pygame.image.load("testImage.png").convert()
 firstChoice = pygame.image.load("firstChoice.png").convert()
+bookImage = pygame.image.load("Book.png").convert()
 pygame.display.set_caption("RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 surface1 = pygame.Surface((display_width, display_height))
 
@@ -54,8 +55,6 @@ def draw_image1(startImage, x, y, display_time):
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         running = False
-
-bookImage = pygame.image.load("Book.png").convert()
 def draw_image2(bookImage, x, y, display_time):
   running = True
   display_width = 500
@@ -74,8 +73,6 @@ def draw_image2(bookImage, x, y, display_time):
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         running = False
-
-firstChoice = pygame.image.load("firstChoice.png").convert()
 def draw_image3(firstChoice, x, y, display_time):
   running = True
   display_width = 500
@@ -97,50 +94,50 @@ def draw_image3(firstChoice, x, y, display_time):
       if event.type == pygame.QUIT:
         running = False
 
-def book_was_clicked(x1, y1, x2, y2):
-  running = True
-  clicked = False
-  while running:
-    for event in pygame.event.get():
-      if event.type == pygame.QUIT:
-        running = False
-      elif event.type == pygame.MOUSEBUTTONDOWN:
-        mouse_x, mouse_y = pygame.mouse.get_pos()
-        print("Mouse position:", mouse_x, mouse_y)  
-        if x1 <= mouse_x <= x2 and y1 <= mouse_y <= y2:
-          screen.fill(0)
-          draw_image2(bookImage,1,1,0)
-          clicked = True
-          print("Clicked on book")  
-          pygame.display.update()
-          pygame.display.flip()
-          break
-  return clicked
+# def book_was_clicked(x1, y1, x2, y2):
+#   running = True
+#   clicked = False
+#   while running:
+#     for event in pygame.event.get():
+#       if event.type == pygame.QUIT:
+#         running = False
+#       elif event.type == pygame.MOUSEBUTTONDOWN:
+#         mouse_x, mouse_y = pygame.mouse.get_pos()
+#         print("Mouse position:", mouse_x, mouse_y)  
+#         if x1 <= mouse_x <= x2 and y1 <= mouse_y <= y2:
+#           screen.fill(0)
+#           draw_image2(bookImage,1,1,0)
+#           clicked = True
+#           print("Clicked on book")  
+#           pygame.display.update()
+#           pygame.display.flip()
+#           break
+#   return clicked
 
-def corner_was_clicked(x1, y1, x2, y2):
-  running = True
-  clicked = False
-  while running:
-    for event in pygame.event.get():
-      if event.type == pygame.QUIT:
-        running = False
-      elif event.type == pygame.MOUSEBUTTONDOWN:
-        mouse_x, mouse_y = pygame.mouse.get_pos()
-        print("Mouse position:", mouse_x, mouse_y)  
-        x1 = 320
-        x2 = 450
-        y1 = 350
-        y2 = 475
-        if x1 <= mouse_x <= x2 and y1 <= mouse_y <= y2:
-          screen.fill(0)
-          screen.blit(firstChoice, (1, 1))
-          draw_image3(firstChoice,1,1,0)
-          clicked = True
-          print("Clicked on corner")  
-          pygame.display.update()
-          pygame.display.flip()
-          break
-  return clicked
+# def corner_was_clicked(x1, y1, x2, y2):
+#   running = True
+#   clicked = False
+#   while running:
+#     for event in pygame.event.get():
+#       if event.type == pygame.QUIT:
+#         running = False
+#       elif event.type == pygame.MOUSEBUTTONDOWN:
+#         mouse_x, mouse_y = pygame.mouse.get_pos()
+#         print("Mouse position:", mouse_x, mouse_y)  
+#         x1 = 320
+#         x2 = 450
+#         y1 = 350
+#         y2 = 475
+#         if x1 <= mouse_x <= x2 and y1 <= mouse_y <= y2:
+#           screen.fill(0)
+#           screen.blit(firstChoice, (1, 1))
+#           draw_image3(firstChoice,1,1,0)
+#           clicked = True
+#           print("Clicked on corner")  
+#           pygame.display.update()
+#           pygame.display.flip()
+#           break
+#   return clicked
 
 
   
