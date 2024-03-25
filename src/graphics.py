@@ -141,3 +141,6 @@ def corner_was_clicked(x1, y1, x2, y2):
           pygame.display.flip()
           break
   return clicked
+
+
+  
