@@ -9,13 +9,9 @@
 #quests
 from graphics import draw_image2
 from graphics import draw_image3
-from graphics import book_was_clicked
-from graphics import corner_was_clicked
 from graphics import startImage
 from graphics import draw_image1
 from graphics import bookImage
-#from graphics import something_was_clicked
-from graphics import testImage
 from graphics import firstChoice
 from Player import name
 import time
@@ -42,30 +38,31 @@ print("")
 running = True
 start_time = pygame.time.get_ticks()
 intro_printed = False
+first_choice_printed = False
+bookClicked = False
+cornerClicked = False
+
 while running:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       running = False
-    elif isClicked(320, 450, 350, 475):
+    elif not bookClicked and isClicked(200, 350, 375, 450):
         draw_image2(bookImage, 2,2, 0)
-        pygame.display.update()
-        pygame.display.flip()
         if not intro_printed:
           print("\n"+ "temporary intro paragraph for information")
           print("\n" + "click on the bottom right corner of the book to continue")
           intro_printed = True
-        time.sleep(2)
-        if isClicked(340, 450, 350, 490):
-        # if event.type == pygame.MOUSEBUTTONDOWN and corner_was_clicked(320, 450, 350, 475) and book_clicked and not corner_clicked:
+        cornerClicked = False
+        bookClicked = True
+        if not cornerClicked and isClicked(340, 450, 350, 490):
           print("\n" + "clicked on corner")
           draw_image3(firstChoice, 2, 2, 0)
-          pygame.display.update()
-          pygame.display.flip()
-          corner_clicked = True
-          print("test")
-          print("\n" + 
+          # pygame.display.update()
+          # pygame.display.flip()
+          if not first_choice_printed:
+            print("\n" + 
               "Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey."
           )
+            first_choice_printed = True
 
-pygame.display.update()
 #pygame.quit()
