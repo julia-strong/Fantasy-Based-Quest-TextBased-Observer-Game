@@ -13,12 +13,12 @@ from graphics import startImage
 from graphics import draw_image1
 from graphics import bookImage
 from graphics import firstChoice
+from graphics import testRect
 from Player import name
 import time
 import pygame
 from button import isClicked
 
-pygame.init()
 
 display_width = 500
 display_height = 500
@@ -28,40 +28,30 @@ pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 
 draw_image1(startImage, 1, 1, display_time)
-
+testRect()
+pygame.display.flip()
 print(
     "Welcome to the RPG Fantasy Based Game with Text Based, Clicker Game, and Graphics Aspects!"
 )
-name = input("What is your character's name?" + "\n")
-print(name)
-print("Welcome," + "\n" + name + "!" + "\n" + "Click on the book to begin!")
+# name = input("What is your character's name?" + "\n")
+# print(name)
+# print("Welcome," + "\n" + name + "!" )
+print("\n" + "Click on the book to begin!")
 print("")
 running = True
 start_time = pygame.time.get_ticks()
-intro_printed = False
-first_choice_printed = False
-input1 = input()
 while running:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       running = False
     elif isClicked(200, 350, 375, 450):
-        screen.fill(0)
         draw_image2(bookImage, 2,2, 0)
-        if not intro_printed:
-          print("\n"+ "temporary intro paragraph for information")
-          print("\n" + "click on the bottom right corner of the book to continue")
-          intro_printed = True
+        print("\n"+ "temporary intro paragraph for information")
+        print("\n" + "click on the bottom right corner of the book to continue")
         if isClicked(340, 450, 350, 490):
           print("\n" + "clicked on corner")
-          # screen.fill(0)
           draw_image3(firstChoice, 2, 2, 0)
-          # pygame.display.update()
-          # pygame.display.flip()
-          if not first_choice_printed:
-            print("\n" + 
+          print("\n" + 
               "Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey."
           )
-            first_choice_printed = True
 
-#pygame.quit()

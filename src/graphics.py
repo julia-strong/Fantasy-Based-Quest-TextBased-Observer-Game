@@ -13,8 +13,12 @@ startImage = pygame.image.load("startImage.png").convert()
 testImage = pygame.image.load("testImage.png").convert()
 firstChoice = pygame.image.load("firstChoice.png").convert()
 bookImage = pygame.image.load("Book.png").convert()
-pygame.display.set_caption("RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
+pygame.display.set_caption("RPsG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 surface1 = pygame.Surface((display_width, display_height))
+def testRect():
+  color = (255,0,0)
+  pygame.draw.rect(screen,color,pygame.Rect(195,200,210,220),2)
+  pygame.display.flip()
 
 def draw_image(image, x, y):
   running = True
@@ -140,4 +144,3 @@ def draw_image3(firstChoice, x, y, display_time):
 #   return clicked
 
 
-  
