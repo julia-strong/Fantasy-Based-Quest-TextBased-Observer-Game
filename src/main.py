@@ -33,28 +33,24 @@ print(
     "Welcome to the RPG Fantasy Based Game with Text Based, Clicker Game, and Graphics Aspects!"
 )
 name = input("What is your character's name?" + "\n")
-print("Welcome," + "\n" + name + "!" + "\n" + "Click on the book to begin!")
+print("Welcome," + "\n" + name + "!" + "\n" + "Click on the book OR press enter to begin!")
 print("")
 running = True
 start_time = pygame.time.get_ticks()
 intro_printed = False
 first_choice_printed = False
-bookClicked = False
-cornerClicked = False
-
+input1 = input()
 while running:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       running = False
-    elif not bookClicked and isClicked(200, 350, 375, 450):
+    elif isClicked(200, 350, 375, 450) or input1 == "":
         draw_image2(bookImage, 2,2, 0)
         if not intro_printed:
           print("\n"+ "temporary intro paragraph for information")
           print("\n" + "click on the bottom right corner of the book to continue")
           intro_printed = True
-        cornerClicked = False
-        bookClicked = True
-        if not cornerClicked and isClicked(340, 450, 350, 490):
+        if isClicked(340, 450, 350, 490):
           print("\n" + "clicked on corner")
           draw_image3(firstChoice, 2, 2, 0)
           # pygame.display.update()
