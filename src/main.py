@@ -39,9 +39,9 @@ print(
 name = input("What is your character's name?" + "\n")
 print("Welcome," + "\n" + name + "!" + "\n" + "Click on the book to begin!")
 print("")
-time.sleep(4)
 running = True
 start_time = pygame.time.get_ticks()
+intro_printed = False
 while running:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
@@ -50,8 +50,11 @@ while running:
         draw_image2(bookImage, 2,2, 0)
         pygame.display.update()
         pygame.display.flip()
-        print("\n"+ "temporary intro paragraph for information")
-        print("\n" + "click on the bottom right corner of the book to continue")
+        if not intro_printed:
+          print("\n"+ "temporary intro paragraph for information")
+          print("\n" + "click on the bottom right corner of the book to continue")
+          intro_printed = True
+        time.sleep(2)
         if isClicked(340, 450, 350, 490):
         # if event.type == pygame.MOUSEBUTTONDOWN and corner_was_clicked(320, 450, 350, 475) and book_clicked and not corner_clicked:
           print("\n" + "clicked on corner")
