@@ -45,6 +45,7 @@ while running:
     if event.type == pygame.QUIT:
       running = False
     elif isClicked(200, 350, 375, 450) or input1 == "":
+        screen.fill(0)
         draw_image2(bookImage, 2,2, 0)
         if not intro_printed:
           print("\n"+ "temporary intro paragraph for information")
@@ -52,6 +53,7 @@ while running:
           intro_printed = True
         if isClicked(340, 450, 350, 490):
           print("\n" + "clicked on corner")
+          screen.fill(0)
           draw_image3(firstChoice, 2, 2, 0)
           # pygame.display.update()
           # pygame.display.flip()
