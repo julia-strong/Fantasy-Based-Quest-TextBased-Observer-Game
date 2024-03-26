@@ -13,16 +13,18 @@ from graphics import startImage
 from graphics import draw_image1
 from graphics import bookImage
 from graphics import firstChoice
-from graphics import testPolygon
 from Player import name
 import time
 import pygame
 from button import isClicked
+# from button import testPolygon
+
 
 
 display_width = 500
 display_height = 500
 display_time = 5000
+gamestart = False
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -37,22 +39,26 @@ print(
 # print("Welcome," + "\n" + name + "!" )
 print("\n" + "Click on the book to begin!")
 print("")
-testPolygon()
+
 
 running = True
 start_time = pygame.time.get_ticks()
 while running:
   for event in pygame.event.get():
-    if event.type == pygame.QUIT:
-      running = False
-    elif isClicked(200, 350, 375, 450):
-        draw_image2(bookImage, 2,2, 0)
-        print("\n"+ "temporary intro paragraph for information")
-        print("\n" + "click on the bottom right corner of the book to continue")
-        if isClicked(340, 450, 350, 490):
-          print("\n" + "clicked on corner")
-          draw_image3(firstChoice, 2, 2, 0)
-          print("\n" + 
+    while not gamestart:
+      if event.type == pygame.QUIT:
+        running = False
+      elif event.type != pygame.QUIT:
+        if isClicked(150, 350, 395, 460):
+          draw_image2(bookImage, 2,2, 0)
+          gamestart = True
+          if gamestart:
+            print("\n"+ "temporary intro paragraph for information")
+            print("\n" + "click on the bottom right corner of the book to continue")
+            if isClicked(340, 450, 350, 490):
+              print("\n" + "clicked on corner")
+              draw_image3(firstChoice, 2, 2, 0)
+              print("\n" + 
               "Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey."
           )
 

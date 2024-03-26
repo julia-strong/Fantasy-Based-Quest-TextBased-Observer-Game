@@ -1,5 +1,4 @@
 import pygame
-import pygame
 
 pygame.init()
 display_width = 500
@@ -15,14 +14,6 @@ firstChoice = pygame.image.load("firstChoice.png").convert()
 bookImage = pygame.image.load("Book.png").convert()
 pygame.display.set_caption("RPsG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 surface1 = pygame.Surface((display_width, display_height))
-def testPolygon():
-  color = (255,0,0)
-  # pygame.draw.polygon(screen,color,[[200,395],[355,395],[315,460],[150,460]],2)
-  pygame.display.flip()
-  inside_firstBook = pygame.mouse.get_pressed()[0] and pygame.draw.polygon(screen, color, [[200, 395], [355, 395], [315, 460], [150, 460]]).collidepoint(cursor_pos)
-
-  if inside_firstBook:
-    print("test")
 def draw_image(image, x, y):
   running = True
   display_width = 500
