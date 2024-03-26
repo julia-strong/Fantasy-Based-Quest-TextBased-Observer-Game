@@ -13,11 +13,9 @@ from graphics import startImage
 from graphics import draw_image1
 from graphics import bookImage
 from graphics import firstChoice
-from Player import name
 import time
 import pygame
 from button import isClicked
-# from button import testPolygon
 
 
 
@@ -34,9 +32,6 @@ pygame.display.flip()
 print(
     "Welcome to the RPG Fantasy Based Game with Text Based, Clicker Game, and Graphics Aspects!"
 )
-# name = input("What is your character's name?" + "\n")
-# print(name)
-# print("Welcome," + "\n" + name + "!" )
 print("\n" + "Click on the book to begin!")
 print("")
 

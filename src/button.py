@@ -13,8 +13,6 @@ def isClicked(X1, X2, Y1, Y2):
     mouseY = pygame.mouse.get_pos()[1]
     if mouseX >= X1 and mouseX <= X2 and mouseY >= Y1 and mouseY <= Y2:
         pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
-        # for event in pygame.event.get():
-        #   if event.type == pygame.MOUSEBUTTONDOWN():
         if pygame.mouse.get_pressed()[0]:
             print("test1")
             pygame.event.wait()
