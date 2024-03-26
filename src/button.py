@@ -1,5 +1,4 @@
 import pygame
-
 def __init__(self, x, y, width, height):
       self.self = self
       self.x = 0

@@ -13,7 +13,7 @@ from graphics import startImage
 from graphics import draw_image1
 from graphics import bookImage
 from graphics import firstChoice
-from graphics import testRect
+from graphics import testPolygon
 from Player import name
 import time
 import pygame
@@ -28,7 +28,6 @@ pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 
 draw_image1(startImage, 1, 1, display_time)
-testRect()
 pygame.display.flip()
 print(
     "Welcome to the RPG Fantasy Based Game with Text Based, Clicker Game, and Graphics Aspects!"
@@ -38,6 +37,8 @@ print(
 # print("Welcome," + "\n" + name + "!" )
 print("\n" + "Click on the book to begin!")
 print("")
+testPolygon()
+
 running = True
 start_time = pygame.time.get_ticks()
 while running:
