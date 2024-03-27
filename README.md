@@ -11,7 +11,7 @@
 ### Mac:
 1. First ensure that python3 is installed on your computer which can be found here: [link](https://www.python.org/downloads/)
 2. Make sure that pygame is also installed in addition, which can be done with "pip3 install pygame" in terminal (additional info can be found here: [link](https://www.pygame.org/wiki/GettingStarted)
-3. After ensuring you have python3 installed, press the green button that says code, and select download as zip from the dropdown menu.
+3. After ensuring you have python3 installed, press the green button that says "code" on this page [link](https://github.com/julia-strong/Fantasy-Based-Quest-TextBased-Observer-Game) and select download as zip from the dropdown menu. 
 4. Then uncompress the file by double clicking on it to ensure that it uncompresses.
 5. Open terminal (which can be found with command + space on a mac, and type "cd Downloads", followed by "cd Fantasy-Based-Quest-TextBased-Observer-Game-main" (you can press tab after typing cd and a few letters of "Fantasy") then "cd src", and then type "python3 main.py" to run the app.
 6. If these steps are followed correctly the app should run smoothly, and then just follow instructions of the app.
@@ -19,7 +19,7 @@
 ### Windows: 
 1. First ensure that python3 is installed on your computer which can be found here: [link](https://www.python.org/downloads/)
 2. Make sure that pygame is also installed in addition, which can be done with "pip3 install pygame" in terminal or command prompt (additional info can be found here: [link]
-3. After ensuring you have python3 installed, press the green button that says code, and select download as zip from the dropdown menu.
+3. After ensuring you have python3 installed, press the green button that says "code" on this page [link](https://github.com/julia-strong/Fantasy-Based-Quest-TextBased-Observer-Game), and select download as zip from the dropdown menu.
 4. Then right click on the file and extract the content and keep the extracted folder in the default location in downloads that is shown in the popup window.
 5. Open terminal or command prompt should work as well (which can be found by pressing the windows key and typing terminal on a windows computer), and type "cd Downloads", followed by "cd Fantasy-Based-Quest-TextBased-Observer-Game-main" (you can press tab after typing cd and a few letters of "Fantasy") then "cd src", and then type "python3 main.py" to run the app.
 6. If these steps are followed correctly the app should run smoothly, and then just follow instructions of the app.
