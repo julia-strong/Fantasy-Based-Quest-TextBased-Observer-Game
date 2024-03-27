@@ -18,7 +18,7 @@ import pygame
 from button import isClicked
 
 
-
+pygame.init()
 display_width = 500
 display_height = 500
 display_time = 5000
@@ -40,20 +40,18 @@ running = True
 start_time = pygame.time.get_ticks()
 while running:
   for event in pygame.event.get():
-    while not gamestart:
-      if event.type == pygame.QUIT:
-        running = False
-      elif event.type != pygame.QUIT:
-        if isClicked(150, 350, 395, 460):
-          draw_image2(bookImage, 2,2, 0)
-          gamestart = True
-          if gamestart:
-            print("\n"+ "temporary intro paragraph for information")
-            print("\n" + "click on the bottom right corner of the book to continue")
-            if isClicked(340, 450, 350, 490):
-              print("\n" + "clicked on corner")
-              draw_image3(firstChoice, 2, 2, 0)
-              print("\n" + 
+    if event.type == pygame.QUIT:
+      running = False
+    elif event.type != pygame.QUIT:
+      if not gamestart and isClicked(150, 350, 395, 460):
+        draw_image2(bookImage, 2,2, 0)
+        gamestart = True
+        print("\n"+ "temporary intro paragraph for information")
+        print("\n" + "click on the bottom right corner of the book to continue (still working on making that work as of now)")
+        if gamestart and isClicked(340, 450, 350, 490):
+            print("\n" + "clicked on corner")
+            draw_image3(firstChoice, 2, 2, 0)
+            print("\n" + 
               "Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey."
           )
 
