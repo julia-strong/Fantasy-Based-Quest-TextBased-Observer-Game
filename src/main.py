@@ -19,6 +19,8 @@ from button import isClicked
 
 
 pygame.init()
+mouseX = pygame.mouse.get_pos()[0]
+mouseY = pygame.mouse.get_pos()[1]
 display_width = 500
 display_height = 500
 display_time = 5000
@@ -47,11 +49,17 @@ while running:
         draw_image2(bookImage, 2,2, 0)
         gamestart = True
         print("\n"+ "temporary intro paragraph for information")
-        print("\n" + "click on the bottom right corner of the book to continue (still working on making that work as of now)")
-        if gamestart and isClicked(340, 450, 350, 490):
-            print("\n" + "clicked on corner")
-            draw_image3(firstChoice, 2, 2, 0)
-            print("\n" + 
-              "Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey."
-          )
+        print("\n" + " click on the bottom right corner of the book to continue (still working on making that work as of now)")
+        # time.sleep(2)
+        # pygame.event.clear()
+        # if gamestart and isClicked(340, 450, 350, 490):
+      # elif gamestart and pygame.mouse.get_pressed()[0] and 340 <= mouseX <= 450 and 350 <= mouseY <= 490:
+      elif gamestart and isClicked(340,450,350,490):
+          # pygame.event.get()
+          # if event.type == pygame.MOUSEBUTTONUP:
+        print("\n" + "clicked on corner")
+        print("\n" + "Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey.")
+        draw_image3(firstChoice, 2, 2, 0)
+        # else:
+        #   pygame.event.wait()
 
