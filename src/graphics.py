@@ -8,10 +8,13 @@ x = 1
 y = 1
 screen = pygame.display.set_mode((display_width, display_height))
 clock = pygame.time.Clock()
+pathstart = pygame.image.load("pathstart.png").convert()
 startImage = pygame.image.load("startImage.png").convert()
 testImage = pygame.image.load("testImage.png").convert()
 firstChoice = pygame.image.load("firstChoice.png").convert()
+backpackImage = pygame.image.load("backpack.png").convert()
 bookImage = pygame.image.load("Book.png").convert()
+crystalBallImage = pygame.image.load("crystalball.png").convert()
 pygame.display.set_caption("RPsG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 surface1 = pygame.Surface((display_width, display_height))
 def draw_image(image, x, y):
@@ -92,49 +95,67 @@ def draw_image3(firstChoice, x, y, display_time):
       if event.type == pygame.QUIT:
         running = False
 
-# def book_was_clicked(x1, y1, x2, y2):
-#   running = True
-#   clicked = False
-#   while running:
-#     for event in pygame.event.get():
-#       if event.type == pygame.QUIT:
-#         running = False
-#       elif event.type == pygame.MOUSEBUTTONDOWN:
-#         mouse_x, mouse_y = pygame.mouse.get_pos()
-#         print("Mouse position:", mouse_x, mouse_y)  
-#         if x1 <= mouse_x <= x2 and y1 <= mouse_y <= y2:
-#           screen.fill(0)
-#           draw_image2(bookImage,1,1,0)
-#           clicked = True
-#           print("Clicked on book")  
-#           pygame.display.update()
-#           pygame.display.flip()
-#           break
-#   return clicked
+def draw_backpack(backpackImage, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_backpack = pygame.transform.scale(
+      backpackImage, (backpackImage.get_width() // 1, backpackImage.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_backpack, (x, y))
+    pygame.display.flip()
 
-# def corner_was_clicked(x1, y1, x2, y2):
-#   running = True
-#   clicked = False
-#   while running:
-#     for event in pygame.event.get():
-#       if event.type == pygame.QUIT:
-#         running = False
-#       elif event.type == pygame.MOUSEBUTTONDOWN:
-#         mouse_x, mouse_y = pygame.mouse.get_pos()
-#         print("Mouse position:", mouse_x, mouse_y)  
-#         x1 = 320
-#         x2 = 450
-#         y1 = 350
-#         y2 = 475
-#         if x1 <= mouse_x <= x2 and y1 <= mouse_y <= y2:
-#           screen.fill(0)
-#           screen.blit(firstChoice, (1, 1))
-#           draw_image3(firstChoice,1,1,0)
-#           clicked = True
-#           print("Clicked on corner")  
-#           pygame.display.update()
-#           pygame.display.flip()
-#           break
-#   return clicked
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
 
 
+def draw_Pathstart(pathstart, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_pathstart = pygame.transform.scale(
+      pathstart, (pathstart.get_width() // 1, pathstart.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_pathstart, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+
+def draw_crystalBall(crystalBallImage, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_crystalBallImage = pygame.transform.scale(
+      crystalBallImage, (crystalBallImage.get_width() // 1, crystalBallImage.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_crystalBallImage, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
