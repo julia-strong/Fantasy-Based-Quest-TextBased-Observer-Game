@@ -62,6 +62,7 @@ while running:
         bookClicked = True
         gamestart = True
         print("\n"+ "temporary intro paragraph for information")
+        print("\n Important Note! \n Try to avoid clicking multiple times on the same thing, unless it is stated otherwise, since it could potentially result in skipping a screen and/or missing important information!")
         print("\n" + " click on the bottom right corner of the book to continue")
       elif gamestart and isClicked(340,450,350,490):
         print("\n" + "Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey.")
@@ -84,8 +85,14 @@ while running:
         draw_Pathstart(pathstart,2,2,0)
         continueAdventure = True
 
-      elif gamestart and not continueAdventure and isClicked(300,350,350,450) and not crystalBallClicked and bookClicked and secondBook:
+      elif gamestart and not continueAdventure and isClicked(200,300,350,450) and not crystalBallClicked and bookClicked and secondBook:
          print("clicked on crystal ball")
          print("[insert townsperson speech]")
          draw_crystalBall(crystalBallImage,2,2,0)
          crystalBallClicked = True
+         print("click anywhere in the screen to continue")
+      elif gamestart and isClicked(0,500,0,500) and crystalBallClicked:
+         print("you have begun your adventure")
+         draw_Pathstart(pathstart,2,2,0)
+         continueAdventure = True
+
