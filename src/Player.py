@@ -1,3 +1,4 @@
 hitPoints = 20
 level = 1
-name = "name" 
+Intelligence: 1
+Damgage = 1

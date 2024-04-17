@@ -15,6 +15,9 @@ firstChoice = pygame.image.load("firstChoice.png").convert()
 backpackImage = pygame.image.load("backpack.png").convert()
 bookImage = pygame.image.load("Book.png").convert()
 crystalBallImage = pygame.image.load("crystalball.png").convert()
+secondPath = pygame.image.load("secondPath.png").convert()
+noFirstEncount = pygame.image.load("noFirstEncount.png").convert()
+firstEncount = pygame.image.load("firstEncount.png").convert()
 pygame.display.set_caption("RPsG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 surface1 = pygame.Surface((display_width, display_height))
 def draw_image(image, x, y):
@@ -150,6 +153,71 @@ def draw_crystalBall(crystalBallImage, x, y, display_time):
   while running:
     screen.fill(0)
     screen.blit(scaled_crystalBallImage, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+
+def draw_secondPath(secondPath, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_secondPath = pygame.transform.scale(
+      secondPath, (secondPath.get_width() // 1, secondPath.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_secondPath, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def draw_noFirstEncount(noFirstEncount, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_noFirstEncount = pygame.transform.scale(
+      noFirstEncount, (noFirstEncount.get_width() // 1, noFirstEncount.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_noFirstEncount, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+
+def draw_firstEncount(firstEncount, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_firstEncount = pygame.transform.scale(
+      firstEncount, (firstEncount.get_width() // 1, firstEncount.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_firstEncount, (x, y))
     pygame.display.flip()
 
     current_time = pygame.time.get_ticks()
