@@ -45,6 +45,7 @@ crystalBallClicked = False
 bookClicked = False
 secondBook = False
 secPath = False
+secpathDrawn  = False
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -87,10 +88,12 @@ while running:
         print("Click on the path to continue")
         draw_Pathstart(pathstart,2,2,0)
         continueAdventure = True
+        pathdrawn = True
         windowClicked = True
       elif inventory and not continueAdventure and isClicked(0,500,0,500):
         print("Click on the path to continue")
         draw_Pathstart(pathstart,2,2,0)
+        pathdrawn = True
         continueAdventure = True
 
       elif gamestart and not continueAdventure and isClicked(200,300,350,450) and not crystalBallClicked and bookClicked and secondBook:
@@ -103,14 +106,16 @@ while running:
          print("Click on the path to continue")
          draw_Pathstart(pathstart,2,2,0)
          continueAdventure = True
+         pathdrawn = True
 
-      if continueAdventure and isClicked(200,300,250,500) and not secPath:
+      if continueAdventure and isClicked(200,300,250,500) and not secPath and pathdrawn:
         inventory = True
         draw_secondPath(secondPath,2,2,0)
         randEncount = random.randint(1,3)
         print("you continue on your journey along the path when you reach a turn in the path and here growling around the corner \n click anywhere in the screen to continue")
         secPath = True
-      elif secPath and isClicked(0,500,0,500):
+        secpathDrawn = True
+      elif secPath and isClicked(0,500,0,500) and secpathDrawn:
         randEncount = random.randint(1,3)
         print(randEncount)
         draw_secondPath(secondPath,2,2,0)
@@ -132,5 +137,10 @@ while running:
           continueAfterFirstEncount = True
         if continueAfterFirstEncount and isClicked(0,500,0,500):
           draw_noFirstEncount(noFirstEncount,2,2,0)
+          print("you continue on the journey")
+          print("click anywhere in the screen to continue")
+          continueContinuing = True
+      if continueContinuing and isClicked (0,500,0,500):
+        
         
       
