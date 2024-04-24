@@ -25,6 +25,8 @@ from graphics import draw_noFirstEncount
 from graphics import draw_secondPath
 from graphics import draw_firstEncount
 from graphics import firstEncount
+from graphics import draw_beachPath
+from graphics import beachPath
 import time
 import pygame
 import random
@@ -141,6 +143,7 @@ while running:
           print("click anywhere in the screen to continue")
           continueContinuing = True
       if continueContinuing and isClicked (0,500,0,500):
-        
+          draw_beachPath(beachPath,2,2,0)
+          print("click on the crab to continue")
         
       
