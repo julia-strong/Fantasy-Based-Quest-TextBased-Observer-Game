@@ -1,6 +1,7 @@
+loot = ["5 gold pieces", "0 silver pieces", "0 copper pieces"]
+
 class Monster:
   hitPoints = 20
-  loot = ["5 gold pieces", "0 silver pieces", "0 copper pieces"]
   damage = 1
 
   def attack(Player):
