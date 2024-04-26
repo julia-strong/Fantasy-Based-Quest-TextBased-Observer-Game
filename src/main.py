@@ -29,6 +29,7 @@ from graphics import draw_beachPath
 from graphics import beachPath
 from Player import hitPoints
 from Player import level
+from Monster import loot
 import time
 import pygame
 import random
@@ -135,6 +136,10 @@ while running:
             print("correct!")
             level += 1
             print("level up! \n your new level is \n" , level)
+            inventoryContents.clear()
+            inventoryContents.append(loot)
+            print("you collected things from the chicken \n your inventory now contains:\n")
+            print(str(loot))
             #print("correct \n click on the chicken's eyes to continue")
           else:
             print("wrong! :( \n you answered: \n" + input1 + "\n the correct answer was a) chicken \n")
