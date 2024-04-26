@@ -27,6 +27,8 @@ from graphics import draw_firstEncount
 from graphics import firstEncount
 from graphics import draw_beachPath
 from graphics import beachPath
+from Player import hitPoints
+from Player import level
 import time
 import pygame
 import random
@@ -50,6 +52,8 @@ bookClicked = False
 secondBook = False
 secPath = False
 secpathDrawn  = False
+crabClicked = False
+beachDrawn = False
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -105,8 +109,8 @@ while running:
          print("[insert townsperson speech]")
          draw_crystalBall(crystalBallImage,2,2,0)
          crystalBallClicked = True
-         print("click anywhere in the screen to continue")
-      elif gamestart and isClicked(0,500,0,500) and crystalBallClicked:
+         print("click in the upper left portion of the screen above the crystal ball to continue")
+      elif gamestart and isClicked(225,400,225,350) and crystalBallClicked:
          print("Click on the path to continue")
          draw_Pathstart(pathstart,2,2,0)
          continueAdventure = True
@@ -116,10 +120,10 @@ while running:
         inventory = True
         draw_secondPath(secondPath,2,2,0)
         randEncount = random.randint(1,3)
-        print("you continue on your journey along the path when you reach a turn in the path and here growling around the corner \n click anywhere in the screen to continue")
+        print("you continue on your journey along the path when you reach a turn in the path and here growling around the corner \n click where the path turns the corner to continue")
         secPath = True
         secpathDrawn = True
-      elif secPath and isClicked(0,500,0,500) and secpathDrawn:
+      elif secPath and isClicked(0,240,125,245) and secpathDrawn:
         randEncount = random.randint(1,3)
         print(randEncount)
         draw_secondPath(secondPath,2,2,0)
@@ -128,24 +132,40 @@ while running:
           draw_firstEncount(firstEncount,2,2,0)
           input1 = input("correctly name the creature to repel it \n a) chicken b) rat c)shark d)other \n")
           if input1.lower() == "a":
-            print("correct \n click  anywhere on the scren to continue")
+            print("correct!")
+            level += 1
+            print("level up! \n your new level is \n" , level)
+            #print("correct \n click on the chicken's eyes to continue")
           else:
-            print("try again" + input1)
+            print("wrong! :( \n you answered: \n" + input1 + "\n the correct answer was a) chicken \n")
+            hitPoints -= 5
+            print("the chicken bit you \n -5 health \n your current health is now \n" , hitPoints)
+            print("click on the chicken's eyes to continue")
           clickedOnFirstCreature = False
           firstCreature = True
-          if not clickedOnFirstCreature and firstCreature and isClicked(0,500,0,500):
+          randEncount = 4
+          if not clickedOnFirstCreature and firstCreature and isClicked(0,200,0,240):
             continueAfterFirstEncount = True
-        elif randEncount != 2:
+            draw_noFirstEncount(noFirstEncount,2,2,0)
+            print("click the sun in the top right portion of the screen to continue")
+            randEncount = 4
+        elif randEncount == 1 or randEncount == 3:
           print("as you turn the corner the growling quiets down and you continue along")
-          print("click anywhere in the screen to continue")
-          continueAfterFirstEncount = True
-        if continueAfterFirstEncount and isClicked(0,500,0,500):
           draw_noFirstEncount(noFirstEncount,2,2,0)
-          print("you continue on the journey")
-          print("click anywhere in the screen to continue")
-          continueContinuing = True
-      if continueContinuing and isClicked (0,500,0,500):
+          print("click on the sun in the upper right corner to continue")
+          continueAfterFirstEncount = True
+          randEncount = 4
+      if continueAfterFirstEncount and isClicked(375,500,0,225) and randEncount == 4:
+        draw_noFirstEncount(noFirstEncount,2,2,0)
+        print("you continue on the journey")
+        print("click on the sun in the upper right corner to continue")
+        continueContinuing = True
+      if continueContinuing and isClicked (375,500,0,225):
           draw_beachPath(beachPath,2,2,0)
           print("click on the crab to continue")
+          beachDrawn = True
+    if continueContinuing and beachDrawn and not crabClicked and isClicked(0,100,370,460):
+       print("test")
+        
         
       
