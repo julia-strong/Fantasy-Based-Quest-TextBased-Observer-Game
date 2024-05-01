@@ -200,7 +200,7 @@ while running:
         print(input2)
       continueFromCrab = True
       print("click in the bottom right corner of the screen to continue")
-    if continueFromCrab and isClicked(450,500,450,500):
+    if continueFromCrab and isClicked(400,500,400,500):
       print("test")
 if hitPoints <= 0:
   print("You have run out of hit points! :( \n Game over!!!")      
