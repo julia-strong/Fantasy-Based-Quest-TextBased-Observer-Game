@@ -27,9 +27,12 @@ from graphics import draw_firstEncount
 from graphics import firstEncount
 from graphics import draw_beachPath
 from graphics import beachPath
+from graphics import draw_CrabEncount
+from graphics import crabEncount
 from Player import hitPoints
 from Player import level
 from Monster import loot
+from Monster import crabLoot
 import time
 import pygame
 import random
@@ -55,6 +58,7 @@ secPath = False
 secpathDrawn  = False
 crabClicked = False
 beachDrawn = False
+clearedInvent = False
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -137,9 +141,10 @@ while running:
             level += 1
             print("level up! \n your new level is \n" , level)
             inventoryContents.clear()
+            clearedInvent = True
             inventoryContents.append(loot)
             print("you collected things from the chicken \n your inventory now contains:\n")
-            print(str(loot))
+            print(loot)
             #print("correct \n click on the chicken's eyes to continue")
           else:
             print("wrong! :( \n you answered: \n" + input1 + "\n the correct answer was a) chicken \n")
@@ -170,7 +175,29 @@ while running:
           print("click on the crab to continue")
           beachDrawn = True
     if continueContinuing and beachDrawn and not crabClicked and isClicked(0,100,370,460):
-       print("test")
+      #  print("test")
+      draw_CrabEncount(crabEncount,2,2,0)
+      input2 = input("You have come across a crab! This encounter is optional, you have a chance of being attacked by the crab, but might be able to get loot from the crab if you take the risk. Will you take the risk? (y/n) \n")
+      if input2.lower() =="n":
+        print("okay!")
+      if input2.lower() == "y":
+        hitPoints -= 5
+        if hitPoints <= 0:
+          print("You have run out of hit points! :( \n Game over!!!")      
+        print("The crab pinches you! \n -5 health \n your current health is now: \n" , hitPoints )
+        print("However you still get loot! Your inventory now contains: \n")
+        if not clearedInvent:
+          inventoryContents.clear()
+          clearedInvent = True
+        else:
+          pass
+        inventoryContents.append(crabLoot)
+        print (inventoryContents)
+      if input2.lower() != "n" and input2.lower() != "y":
+        input2 = input("Invalid input! \n Try again. (y/n) \n")
+        print(input2)
+
         
-        
+if hitPoints <= 0:
+  print("You have run out of hit points! :( \n Game over!!!")      
       
