@@ -59,6 +59,8 @@ secpathDrawn  = False
 crabClicked = False
 beachDrawn = False
 clearedInvent = False
+continueFromCrab = False
+
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -86,7 +88,7 @@ while running:
         print("\n"+ "temporary intro paragraph for information")
         print("\n Important Note! \n Try to avoid clicking multiple times on the same thing, unless it is stated otherwise, since it could potentially result in skipping a screen and/or missing important information!")
         print("\n" + " click on the bottom right corner of the book to continue")
-      elif gamestart and isClicked(340,450,350,490):
+      elif gamestart and isClicked(340,450,350,450) and not continueFromCrab:
         print("\n" + "Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey.")
         draw_image3(firstChoice, 2, 2, 0)
         secondBook = True
@@ -196,8 +198,10 @@ while running:
       if input2.lower() != "n" and input2.lower() != "y":
         input2 = input("Invalid input! \n Try again. (y/n) \n")
         print(input2)
-
-        
+      continueFromCrab = True
+      print("click in the bottom right corner of the screen to continue")
+    if continueFromCrab and isClicked(450,500,450,500):
+      print("test")
 if hitPoints <= 0:
   print("You have run out of hit points! :( \n Game over!!!")      
       
