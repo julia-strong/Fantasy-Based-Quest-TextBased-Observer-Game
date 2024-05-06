@@ -20,6 +20,7 @@ noFirstEncount = pygame.image.load("noFirstEncount.png").convert()
 firstEncount = pygame.image.load("firstEncount.png").convert()
 beachPath = pygame.image.load("beachpath.png").convert()
 crabEncount = pygame.image.load("CrabEncounter.png").convert()
+boatPath pygame.image.load("boatPath.png").convert()
 pygame.display.set_caption("RPsG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 surface1 = pygame.Surface((display_width, display_height))
 def draw_image(image, x, y):
@@ -262,6 +263,27 @@ def draw_CrabEncount(crabEncount, x, y, display_time):
   while running:
     screen.fill(0)
     screen.blit(scaled_CrabEncount, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def draw_boatPath(boatPath, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_boatPath = pygame.transform.scale(
+      boatPath, (boatPath.get_width() // 1, boatPath.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_boatPath, (x, y))
     pygame.display.flip()
 
     current_time = pygame.time.get_ticks()

@@ -29,6 +29,8 @@ from graphics import draw_beachPath
 from graphics import beachPath
 from graphics import draw_CrabEncount
 from graphics import crabEncount
+from graphics import scaled_boatPath
+from graphics impoq boatPath
 from Player import hitPoints
 from Player import level
 from Monster import loot
@@ -201,7 +203,7 @@ while running:
       continueFromCrab = True
       print("click in the bottom right corner of the screen to continue")
     if continueFromCrab and isClicked(400,500,400,500):
-      print("test")
+      draw_boatPath(boatPath,2,2,0)
 if hitPoints <= 0:
   print("You have run out of hit points! :( \n Game over!!!")      
       
