@@ -30,7 +30,7 @@ from graphics import beachPath
 from graphics import draw_CrabEncount
 from graphics import crabEncount
 from graphics import scaled_boatPath
-from graphics impoq boatPath
+from graphics import boatPath
 from Player import hitPoints
 from Player import level
 from Monster import loot
