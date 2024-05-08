@@ -20,7 +20,7 @@ noFirstEncount = pygame.image.load("noFirstEncount.png").convert()
 firstEncount = pygame.image.load("firstEncount.png").convert()
 beachPath = pygame.image.load("beachpath.png").convert()
 crabEncount = pygame.image.load("CrabEncounter.png").convert()
-boatPath pygame.image.load("boatPath.png").convert()
+boatPath = pygame.image.load("boatPath.png").convert()
 pygame.display.set_caption("RPsG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 surface1 = pygame.Surface((display_width, display_height))
 def draw_image(image, x, y):
