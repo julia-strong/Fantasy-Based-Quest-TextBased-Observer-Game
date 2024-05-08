@@ -31,10 +31,17 @@ from graphics import draw_CrabEncount
 from graphics import crabEncount
 from graphics import draw_boatPath
 from graphics import boatPath
+from graphics import boat
+from graphics import draw_boat
+from graphics import birdEncount
+from graphics import draw_birdEncount
 from Player import hitPoints
 from Player import level
 from Monster import loot
 from Monster import crabLoot
+from Monster import Monster
+from Monster import Player
+from Monster import birdLoot
 import time
 import pygame
 import random
@@ -62,7 +69,9 @@ crabClicked = False
 beachDrawn = False
 clearedInvent = False
 continueFromCrab = False
-
+continueOntoBoat = False
+sawBird = False
+birdFlewAway = False
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -101,13 +110,13 @@ while running:
         if inventory:
           print(inventoryContents)
           print("click anywhere in the screen to continue")
-      elif gamestart and not continueAdventure and isClicked(100,225,100,225) and not windowClicked:
+      elif gamestart and not continueAdventure and isClicked(100,225,100,225) and not windowClicked and not continueFromCrab:
         print("Click on the path to continue")
         draw_Pathstart(pathstart,2,2,0)
         continueAdventure = True
         pathdrawn = True
         windowClicked = True
-      elif inventory and not continueAdventure and isClicked(0,500,0,500):
+      elif inventory and not continueAdventure and isClicked(0,500,0,500) and not continueFromCrab:
         print("Click on the path to continue")
         draw_Pathstart(pathstart,2,2,0)
         pathdrawn = True
@@ -119,7 +128,7 @@ while running:
          draw_crystalBall(crystalBallImage,2,2,0)
          crystalBallClicked = True
          print("click in the upper left portion of the screen above the crystal ball to continue")
-      elif gamestart and isClicked(225,400,225,350) and crystalBallClicked:
+      elif gamestart and isClicked(225,400,225,350) and crystalBallClicked and not continueFromCrab:
          print("Click on the path to continue")
          draw_Pathstart(pathstart,2,2,0)
          continueAdventure = True
@@ -132,7 +141,7 @@ while running:
         print("you continue on your journey along the path when you reach a turn in the path and here growling around the corner \n click where the path turns the corner to continue")
         secPath = True
         secpathDrawn = True
-      elif secPath and isClicked(0,240,125,245) and secpathDrawn:
+      elif secPath and isClicked(0,240,125,245) and secpathDrawn and not continueOntoBoat:
         randEncount = random.randint(1,3)
         print(randEncount)
         draw_secondPath(secondPath,2,2,0)
@@ -149,12 +158,10 @@ while running:
             inventoryContents.append(loot)
             print("you collected things from the chicken \n your inventory now contains:\n")
             print(loot)
-            #print("correct \n click on the chicken's eyes to continue")
           else:
             print("wrong! :( \n you answered: \n" + input1 + "\n the correct answer was a) chicken \n")
             hitPoints -= 5
             print("the chicken bit you \n -5 health \n your current health is now \n" , hitPoints)
-            print("click on the chicken's eyes to continue")
           clickedOnFirstCreature = False
           firstCreature = True
           randEncount = 4
@@ -169,16 +176,16 @@ while running:
           print("click on the sun in the upper right corner to continue")
           continueAfterFirstEncount = True
           randEncount = 4
-      if continueAfterFirstEncount and isClicked(375,500,0,225) and randEncount == 4:
+      if continueAfterFirstEncount and isClicked(375,500,0,225) and randEncount == 4 and not continueOntoBoat:
         draw_noFirstEncount(noFirstEncount,2,2,0)
         print("you continue on the journey")
         print("click on the sun in the upper right corner to continue")
         continueContinuing = True
-      if continueContinuing and isClicked (375,500,0,225):
+      if continueContinuing and isClicked (375,500,0,225) and not continueOntoBoat:
           draw_beachPath(beachPath,2,2,0)
           print("click on the crab to continue")
           beachDrawn = True
-    if continueContinuing and beachDrawn and not crabClicked and isClicked(0,100,370,460):
+    if continueContinuing and beachDrawn and not crabClicked and isClicked(0,100,370,460) and not continueOntoBoat:
       #  print("test")
       draw_CrabEncount(crabEncount,2,2,0)
       input2 = input("You have come across a crab! This encounter is optional, you have a chance of being attacked by the crab, but might be able to get loot from the crab if you take the risk. Will you take the risk? (y/n) \n")
@@ -202,8 +209,37 @@ while running:
         print(input2)
       continueFromCrab = True
       print("click in the bottom right corner of the screen to continue")
-    if continueFromCrab and isClicked(400,500,400,500):
+    if continueFromCrab and isClicked(400,500,400,500) and not continueOntoBoat:
       draw_boatPath(boatPath,2,2,0)
+      print("click on the boat to continue")
+      continueOntoBoat = True
+    elif continueOntoBoat and isClicked(300,475,175,350) and not birdFlewAway:
+      draw_boat(boat,2,2,0)  
+      print("you see a bird in the sky \n click on the bird to investigate")   
+      sawBird = True
+    if sawBird and isClicked(10,150,10,150):
+      draw_birdEncount(birdEncount,2,2,0)
+      print("the bird flies over and lands on your boat")
+      input3 = input("there is a risk the bird might attack, would you like to continue (y/n)")
+      if input3.lower() == "y":
+        print("the bird got upset")
+        Monster.attack(Player)
+        input4 = input("would you like to engage in battle with this creature? (y/n)")
+        if input4.lower() == "y":
+          Monster.attack(Player)
+          print("you manage to fend off the creature and collect loot")
+          inventoryContents.append(birdLoot)
+          print("Your inventory now contains: \n")
+          input3 = "n"
+          print(inventoryContents)
+        elif input4.lower() == "n":
+          input3 = "n"
+      if input3.lower() == "n":
+        draw_boat(boat,2,2,0)
+        print("the bird flies away \n click on the flag of the boat to continue")
+        birdFlewAway = True
+    if birdFlewAway and isClicked(260,400,100,300):
+      print("test")
 if hitPoints <= 0:
   print("You have run out of hit points! :( \n Game over!!!")      
       

@@ -21,6 +21,8 @@ firstEncount = pygame.image.load("firstEncount.png").convert()
 beachPath = pygame.image.load("beachpath.png").convert()
 crabEncount = pygame.image.load("CrabEncounter.png").convert()
 boatPath = pygame.image.load("boatPath.png").convert()
+boat = pygame.image.load("boat.png").convert()
+birdEncount = pygame.image.load("birdEncount.png").convert()
 pygame.display.set_caption("RPsG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 surface1 = pygame.Surface((display_width, display_height))
 def draw_image(image, x, y):
@@ -284,6 +286,48 @@ def draw_boatPath(boatPath, x, y, display_time):
   while running:
     screen.fill(0)
     screen.blit(scaled_boatPath, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def draw_boat(boat, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_boat = pygame.transform.scale(
+      boat, (boat.get_width() // 1, boat.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_boat, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def draw_birdEncount(birdEncount, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_birdEncount = pygame.transform.scale(
+      birdEncount, (birdEncount.get_width() // 1, birdEncount.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_birdEncount, (x, y))
     pygame.display.flip()
 
     current_time = pygame.time.get_ticks()
