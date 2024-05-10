@@ -35,6 +35,10 @@ from graphics import boat
 from graphics import draw_boat
 from graphics import birdEncount
 from graphics import draw_birdEncount
+from graphics import findPotion
+from graphics import draw_findPotion
+from graphics import healthBoost
+from graphics import draw_healthBoost
 from Player import hitPoints
 from Player import level
 from Monster import loot
@@ -72,6 +76,7 @@ continueFromCrab = False
 continueOntoBoat = False
 sawBird = False
 birdFlewAway = False
+defeatBird = False
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -105,7 +110,7 @@ while running:
         secondBook = True
       elif gamestart and not inventory and isClicked(325,425,200,350):
         draw_backpack(backpackImage,2,2,0)
-        time.sleep(4)
+        time.sleep(2)
         inventory = True
         if inventory:
           print(inventoryContents)
@@ -160,8 +165,8 @@ while running:
             print(loot)
           else:
             print("wrong! :( \n you answered: \n" + input1 + "\n the correct answer was a) chicken \n")
-            hitPoints -= 5
-            print("the chicken bit you \n -5 health \n your current health is now \n" , hitPoints)
+            Player.hitPoints -= 5
+            print("the chicken bit you \n -5 health \n your current health is now: \n" , Player.hitPoints)
           clickedOnFirstCreature = False
           firstCreature = True
           randEncount = 4
@@ -192,10 +197,10 @@ while running:
       if input2.lower() =="n":
         print("okay!")
       if input2.lower() == "y":
-        hitPoints -= 5
-        if hitPoints <= 0:
+        Player.hitPoints -= 5
+        if Player.hitPoints <= 0:
           print("You have run out of hit points! :( \n Game over!!!")      
-        print("The crab pinches you! \n -5 health \n your current health is now: \n" , hitPoints )
+        print("The crab pinches you! \n -5 health \n your current health is now: \n" , Player.hitPoints )
         print("However you still get loot! Your inventory now contains: \n")
         if not clearedInvent:
           inventoryContents.clear()
@@ -220,18 +225,34 @@ while running:
     if sawBird and isClicked(10,150,10,150):
       draw_birdEncount(birdEncount,2,2,0)
       print("the bird flies over and lands on your boat")
-      input3 = input("there is a risk the bird might attack, would you like to continue (y/n)")
+      input3 = input("there is a risk the bird might attack, would you like to continue (y/n) \n")
       if input3.lower() == "y":
         print("the bird got upset")
         Monster.attack(Player)
-        input4 = input("would you like to engage in battle with this creature? (y/n)")
+        input4 = input("would you like to engage in battle with this creature? (y/n) \n")
         if input4.lower() == "y":
-          Monster.attack(Player)
-          print("you manage to fend off the creature and collect loot")
-          inventoryContents.append(birdLoot)
-          print("Your inventory now contains: \n")
-          input3 = "n"
-          print(inventoryContents)
+          print("you have engaged in battle with the creature")
+          sucessfulMosterAttack = random.randint(1,3)
+          print(sucessfulMosterAttack)
+          if sucessfulMosterAttack == 1:
+            Monster.attack(Player)
+            secondMonsterAttack = random.randint(1,2)
+            print(secondMonsterAttack)
+            if secondMonsterAttack == 2:
+              Monster.attack(Player)
+            elif secondMonsterAttack != 2:
+              print("you manage to fend off the creature and collect loot")
+              defeatBird = True
+          elif sucessfulMosterAttack != 1:
+            print("you manage to fend off the creature and collect loot")
+            defeatBird = True
+          if defeatBird:
+            if not clearedInvent:
+              inventoryContents.clear()
+            inventoryContents.append(birdLoot)
+            print("Your inventory now contains: \n")
+            input3 = "n"
+            print(inventoryContents)
         elif input4.lower() == "n":
           input3 = "n"
       if input3.lower() == "n":
@@ -239,7 +260,30 @@ while running:
         print("the bird flies away \n click on the flag of the boat to continue")
         birdFlewAway = True
     if birdFlewAway and isClicked(260,400,100,300):
-      print("test")
-if hitPoints <= 0:
+      draw_findPotion(findPotion,2,2,0)
+      input5 = input("you find a mysterious vile with a green liquid do you want to consume it? (y/n) \n")
+      if input5.lower() == "n":
+        draw_healthBoost(healthBoost,2,2,0)
+        input6 = input("a wave crashes against the boat and the bottle topples over the edge of the boat falling into the sea \n you see a small label on the bottle reading 'health increasing potion' would you like to try to grab the bottle? (y/n) \n")
+        if input6.lower() == "n":
+          print("you watch as the bottle sinks slowly into the water")
+        if input6.lower() == "y":
+          Player.hitPoints -= 1
+          print("you manage to grab the bottle just before it gets fully submurged by the water \n although a piranha bites your finger \n your health decreases \n your current health is now: \n", Player.hitPoints)
+          input5 = "y"
+      elif input5.lower() == "y":
+        allergicToPotion = random.randint(1,100)
+        print(allergicToPotion)
+        if allergicToPotion != 50:
+          print("you drink the bottle and notice its effects working, as you flip the bottle over you see a lable stating 'health increasing potion' ")
+          Player.hitPoints += 5
+          print("your current health is now", Player.hitPoints)
+        elif allergicToPotion == 50:
+          print("as you drink the bottle you flip the bottle over you see a lable stating 'health increasing potion' ")
+          print("you start to feel sick after drinking the bottle and realize that you are allergic to this potion")
+          Player.hitPoints -= 5
+          print("your health declines \n your current health is now: \n", Player.hitPoints)
+if Player.hitPoints <= 0:
+  time.sleep(4)
   print("You have run out of hit points! :( \n Game over!!!")      
       

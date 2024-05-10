@@ -23,6 +23,8 @@ crabEncount = pygame.image.load("CrabEncounter.png").convert()
 boatPath = pygame.image.load("boatPath.png").convert()
 boat = pygame.image.load("boat.png").convert()
 birdEncount = pygame.image.load("birdEncount.png").convert()
+findPotion = pygame.image.load("findPotion.png").convert()
+healthBoost = pygame.image.load("healthBoost.png").convert()
 pygame.display.set_caption("RPsG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 surface1 = pygame.Surface((display_width, display_height))
 def draw_image(image, x, y):
@@ -328,6 +330,48 @@ def draw_birdEncount(birdEncount, x, y, display_time):
   while running:
     screen.fill(0)
     screen.blit(scaled_birdEncount, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def draw_findPotion(findPotion, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_findPotion = pygame.transform.scale(
+      findPotion, (findPotion.get_width() // 1, findPotion.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_findPotion, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def draw_healthBoost(healthBoost, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_healthBoost = pygame.transform.scale(
+      healthBoost, (healthBoost.get_width() // 1, healthBoost.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_healthBoost, (x, y))
     pygame.display.flip()
 
     current_time = pygame.time.get_ticks()
