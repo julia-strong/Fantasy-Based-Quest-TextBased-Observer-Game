@@ -240,6 +240,7 @@ while running:
             print(secondMonsterAttack)
             if secondMonsterAttack == 2:
               Monster.attack(Player)
+              secondMonsterAttack = 1
             elif secondMonsterAttack != 2:
               print("you manage to fend off the creature and collect loot")
               defeatBird = True
