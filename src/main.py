@@ -43,6 +43,8 @@ from graphics import arriveOnShore
 from graphics import draw_arriveOnShore
 from graphics import caveEntrance
 from graphics import draw_caveEntrance
+from graphics import startTunnel
+from graphics import draw_startTunnel
 from Player import hitPoints
 from Player import level
 from Monster import loot
@@ -85,6 +87,7 @@ potionSeen = False
 arrivedOnIsland = False
 piranha = False
 foundCave = False
+enteredCave = False
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -147,14 +150,14 @@ while running:
          continueAdventure = True
          pathdrawn = True
 
-      if continueAdventure and isClicked(200,300,250,500) and not secPath and pathdrawn and not foundCave:
+      if continueAdventure and isClicked(200,300,250,500) and not secPath and pathdrawn and not foundCave and not enteredCave:
         inventory = True
         draw_secondPath(secondPath,2,2,0)
         randEncount = random.randint(1,3)
         print("you continue on your journey along the path when you reach a turn in the path and here growling around the corner \n click where the path turns the corner to continue")
         secPath = True
         secpathDrawn = True
-      elif secPath and isClicked(0,230,125,235) and secpathDrawn and not continueOntoBoat and not foundCave:
+      elif secPath and isClicked(0,230,125,235) and secpathDrawn and not continueOntoBoat and not foundCave and not enteredCave:
         randEncount = random.randint(1,3)
         # print(randEncount)
         draw_secondPath(secondPath,2,2,0)
@@ -230,7 +233,7 @@ while running:
       draw_boat(boat,2,2,0)  
       print("you see a bird in the sky \n click on the bird to investigate")   
       sawBird = True
-    if sawBird and isClicked(10,150,10,150):
+    if sawBird and isClicked(10,150,10,150) and not enteredCave:
       draw_birdEncount(birdEncount,2,2,0)
       print("the bird flies over and lands on your boat")
       input3 = input("there is a risk the bird might attack, would you like to continue (y/n) \n")
@@ -303,11 +306,15 @@ while running:
       draw_arriveOnShore(arriveOnShore,2,2,0)
       print("you arrive on the shore of a mysterious island, click on the tree on the right to continue on your journey")
       arrivedOnIsland = True
-    elif arrivedOnIsland and isClicked(375,500,100,250):
+    elif arrivedOnIsland and isClicked(375,500,100,250) and not enteredCave:
       draw_caveEntrance(caveEntrance,2,2,0)
       print("you continue along your journey when you come across a cave you remember hearing that this cave may contain a monster that no other adventurer has been able to defeat, click on the stone closest to the cave to proceed")
       foundCave = True
-    if foundCave and isClicked(220,360,290,350):
+    if foundCave and isClicked(220,360,290,350) and not enteredCave:
+      draw_startTunnel(startTunnel,2,2,0)
+      print("you make your way into the cave and down a set of stairs \n click on the creature at the end of the tunnel to continue")
+      enteredCave = True
+    elif enteredCave and isClicked(290,350,100,150):
       print("test")
 if Player.hitPoints <= 0:
   time.sleep(4)
