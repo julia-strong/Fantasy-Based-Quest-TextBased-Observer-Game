@@ -39,6 +39,10 @@ from graphics import findPotion
 from graphics import draw_findPotion
 from graphics import healthBoost
 from graphics import draw_healthBoost
+from graphics import arriveOnShore
+from graphics import draw_arriveOnShore
+from graphics import caveEntrance
+from graphics import draw_caveEntrance
 from Player import hitPoints
 from Player import level
 from Monster import loot
@@ -77,6 +81,10 @@ continueOntoBoat = False
 sawBird = False
 birdFlewAway = False
 defeatBird = False
+potionSeen = False
+arrivedOnIsland = False
+piranha = False
+foundCave = False
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -104,11 +112,11 @@ while running:
         print("\n"+ "temporary intro paragraph for information")
         print("\n Important Note! \n Try to avoid clicking multiple times on the same thing, unless it is stated otherwise, since it could potentially result in skipping a screen and/or missing important information!")
         print("\n" + " click on the bottom right corner of the book to continue")
-      elif gamestart and isClicked(340,450,350,450) and not continueFromCrab:
+      elif gamestart and isClicked(340,450,350,450) and not continueFromCrab and not potionSeen:
         print("\n" + "Click on the crystal ball to hear from a townsperson for additional information. Click on the backpack to see your inventory. Click on the window to continue on your journey.")
         draw_image3(firstChoice, 2, 2, 0)
         secondBook = True
-      elif gamestart and not inventory and isClicked(325,425,200,350):
+      elif gamestart and not inventory and isClicked(325,425,200,350) and not arrivedOnIsland:
         draw_backpack(backpackImage,2,2,0)
         time.sleep(2)
         inventory = True
@@ -127,7 +135,7 @@ while running:
         pathdrawn = True
         continueAdventure = True
 
-      elif gamestart and not continueAdventure and isClicked(200,300,350,450) and not crystalBallClicked and bookClicked and secondBook:
+      elif gamestart and not continueAdventure and isClicked(200,300,350,450) and not crystalBallClicked and bookClicked and secondBook and not foundCave:
          print("clicked on crystal ball")
          print("[insert townsperson speech]")
          draw_crystalBall(crystalBallImage,2,2,0)
@@ -139,16 +147,16 @@ while running:
          continueAdventure = True
          pathdrawn = True
 
-      if continueAdventure and isClicked(200,300,250,500) and not secPath and pathdrawn:
+      if continueAdventure and isClicked(200,300,250,500) and not secPath and pathdrawn and not foundCave:
         inventory = True
         draw_secondPath(secondPath,2,2,0)
         randEncount = random.randint(1,3)
         print("you continue on your journey along the path when you reach a turn in the path and here growling around the corner \n click where the path turns the corner to continue")
         secPath = True
         secpathDrawn = True
-      elif secPath and isClicked(0,240,125,245) and secpathDrawn and not continueOntoBoat:
+      elif secPath and isClicked(0,230,125,235) and secpathDrawn and not continueOntoBoat and not foundCave:
         randEncount = random.randint(1,3)
-        print(randEncount)
+        # print(randEncount)
         draw_secondPath(secondPath,2,2,0)
         if randEncount == 2:
           print("you come across your first encounter! The townsperson that you may have spoken to earlier in the journey mentioned that you will encounter these sorts of creatures.")
@@ -186,7 +194,7 @@ while running:
         print("you continue on the journey")
         print("click on the sun in the upper right corner to continue")
         continueContinuing = True
-      if continueContinuing and isClicked (375,500,0,225) and not continueOntoBoat:
+      if continueContinuing and isClicked (375,500,0,225) and not continueOntoBoat and not arrivedOnIsland:
           draw_beachPath(beachPath,2,2,0)
           print("click on the crab to continue")
           beachDrawn = True
@@ -233,11 +241,11 @@ while running:
         if input4.lower() == "y":
           print("you have engaged in battle with the creature")
           sucessfulMosterAttack = random.randint(1,3)
-          print(sucessfulMosterAttack)
+          # print(sucessfulMosterAttack)
           if sucessfulMosterAttack == 1:
             Monster.attack(Player)
             secondMonsterAttack = random.randint(1,2)
-            print(secondMonsterAttack)
+            # print(secondMonsterAttack)
             if secondMonsterAttack == 2:
               Monster.attack(Player)
               secondMonsterAttack = 1
@@ -260,7 +268,7 @@ while running:
         draw_boat(boat,2,2,0)
         print("the bird flies away \n click on the flag of the boat to continue")
         birdFlewAway = True
-    if birdFlewAway and isClicked(260,400,100,300):
+    if birdFlewAway and isClicked(260,400,100,300) and not arrivedOnIsland:
       draw_findPotion(findPotion,2,2,0)
       input5 = input("you find a mysterious vile with a green liquid do you want to consume it? (y/n) \n")
       if input5.lower() == "n":
@@ -268,22 +276,39 @@ while running:
         input6 = input("a wave crashes against the boat and the bottle topples over the edge of the boat falling into the sea \n you see a small label on the bottle reading 'health increasing potion' would you like to try to grab the bottle? (y/n) \n")
         if input6.lower() == "n":
           print("you watch as the bottle sinks slowly into the water")
+          print("click on the bottom right corner of the screen to continue")
+          potionSeen = True
         if input6.lower() == "y":
           Player.hitPoints -= 1
           print("you manage to grab the bottle just before it gets fully submurged by the water \n although a piranha bites your finger \n your health decreases \n your current health is now: \n", Player.hitPoints)
-          input5 = "y"
-      elif input5.lower() == "y":
+          input5 = "y" 
+          piranha = True
+      if input5.lower() == "y" or piranha:
         allergicToPotion = random.randint(1,100)
-        print(allergicToPotion)
+        # print(allergicToPotion)
         if allergicToPotion != 50:
+          potionSeen = True
           print("you drink the bottle and notice its effects working, as you flip the bottle over you see a lable stating 'health increasing potion' ")
           Player.hitPoints += 5
           print("your current health is now", Player.hitPoints)
+          print("click on the bottom right corner of the screen to continue")
         elif allergicToPotion == 50:
+          potionSeen = True
           print("as you drink the bottle you flip the bottle over you see a lable stating 'health increasing potion' ")
           print("you start to feel sick after drinking the bottle and realize that you are allergic to this potion")
           Player.hitPoints -= 5
           print("your health declines \n your current health is now: \n", Player.hitPoints)
+          print("click on the bottom right corner of the screen to continue")
+    if potionSeen and isClicked(400,500,400,500):
+      draw_arriveOnShore(arriveOnShore,2,2,0)
+      print("you arrive on the shore of a mysterious island, click on the tree on the right to continue on your journey")
+      arrivedOnIsland = True
+    elif arrivedOnIsland and isClicked(375,500,100,250):
+      draw_caveEntrance(caveEntrance,2,2,0)
+      print("you continue along your journey when you come across a cave you remember hearing that this cave may contain a monster that no other adventurer has been able to defeat, click on the stone closest to the cave to proceed")
+      foundCave = True
+    if foundCave and isClicked(220,360,290,350):
+      print("test")
 if Player.hitPoints <= 0:
   time.sleep(4)
   print("You have run out of hit points! :( \n Game over!!!")      
