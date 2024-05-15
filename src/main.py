@@ -298,13 +298,14 @@ while running:
           print("you watch as the bottle sinks slowly into the water")
           print("click on the bottom right corner of the screen to continue")
           potionSeen = True
-        if input6.lower() == "y":
+        elif input6.lower() == "y":
           Player.hitPoints -= 1
           print("you manage to grab the bottle just before it gets fully submurged by the water \n although a piranha bites your finger \n your health decreases \n your current health is now: \n", Player.hitPoints)
           input5 = "y" 
           piranha = True
-      if input5.lower() == "y" or piranha:
+      elif input5.lower() == "y" or piranha:
         allergicToPotion = random.randint(1,100)
+        input5 = " "
         # print(allergicToPotion)
         if allergicToPotion != 50:
           potionSeen = True
@@ -356,21 +357,27 @@ while running:
         inventoryContents.append(loot)
         print("your inventory now contains: \n" , inventoryContents)
         batEncounterEnded = True
+        print("click in the bottom right corner of the screen to continue")
+        time.sleep(1)
       elif fendOffBat != 2:
         print("you try to fend off the bat but it manages to attack you")
         Monster.attack(Player)
         fendOffBatAgain = random.randint(1,10)
-        batEncounterEnded = True
+        time.sleep(1)
         if fendOffBatAgain == 7:
           print("you try to fend off the bat once again but it still manages to attack you")
           Monster.attack(Player)
           batEncounterEnded = True
+          print("click in the bottom right corner of the screen to continue")
+          time.sleep(1)
         elif fendOffBatAgain != 7:
           print("you manage to fend off the bat sucessfully \n the bat left behind something: \n", batLoot)
           inventoryContents.append(loot)
           print("your inventory now contains: \n" , inventoryContents)
           batEncounterEnded = True
-    if batEncounterEnded:
+          print("click in the bottom right corner of the screen to continue")
+          time.sleep(1)
+    if batEncounterEnded and isClicked(400,500,400,500):
       draw_holeInWall(holeInWall,2,2,0)
       batLeft = True
       print("the bat flies away and you notice a small and mysterious hole in the wall, click on the hole in the wall to continue")    
