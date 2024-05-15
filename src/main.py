@@ -333,11 +333,11 @@ while running:
       draw_startTunnel(startTunnel,2,2,0)
       print("you make your way into the cave and down a set of stairs \n click on the creature at the end of the tunnel to continue")
       enteredCave = True
-    elif enteredCave and isClicked(290,350,100,150):
+    elif enteredCave and isClicked(290,350,100,150) and not batLeft:
       draw_door(door,2,2,0)
       print("you continue along the path, moving deeper and deeper into the cave until you come across a door, click on the doorknob to open the door")
       sawDoor = True
-    if sawDoor and isClicked(285,340,260,340) and not openedDoor:
+    if sawDoor and isClicked(285,340,260,340) and not openedDoor and not batLeft:
       draw_openDoor(openDoor,2,2,0)
       print("you open the door and see a box, click on it to investigate further")
       openedDoor = True
