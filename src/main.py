@@ -49,6 +49,12 @@ from graphics import door
 from graphics import draw_door
 from graphics import openDoor
 from graphics import draw_openDoor
+from graphics import roomWithMouse
+from graphics import draw_roomWithMouse
+from graphics import bat
+from graphics import draw_bat
+from graphics import holeInWall
+from graphics import draw_holeInWall
 from Player import hitPoints
 from Player import level
 from Monster import loot
@@ -56,6 +62,7 @@ from Monster import crabLoot
 from Monster import Monster
 from Monster import Player
 from Monster import birdLoot
+from Monster import batLoot
 import time
 import pygame
 import random
@@ -94,6 +101,10 @@ foundCave = False
 enteredCave = False
 sawDoor = False
 openedDoor = False
+sawMouse = False
+discoveredBat = False
+batEncounterEnded = False
+batLeft = False
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -277,7 +288,7 @@ while running:
         draw_boat(boat,2,2,0)
         print("the bird flies away \n click on the flag of the boat to continue")
         birdFlewAway = True
-    if birdFlewAway and isClicked(260,400,100,300) and not arrivedOnIsland:
+    if birdFlewAway and isClicked(260,400,100,300) and not arrivedOnIsland and not batLeft:
       draw_findPotion(findPotion,2,2,0)
       input5 = input("you find a mysterious vile with a green liquid do you want to consume it? (y/n) \n")
       if input5.lower() == "n":
@@ -301,6 +312,7 @@ while running:
           Player.hitPoints += 5
           print("your current health is now", Player.hitPoints)
           print("click on the bottom right corner of the screen to continue")
+          time.sleep(1)
         elif allergicToPotion == 50:
           potionSeen = True
           print("as you drink the bottle you flip the bottle over you see a lable stating 'health increasing potion' ")
@@ -312,7 +324,7 @@ while running:
       draw_arriveOnShore(arriveOnShore,2,2,0)
       print("you arrive on the shore of a mysterious island, click on the tree on the right to continue on your journey")
       arrivedOnIsland = True
-    elif arrivedOnIsland and isClicked(375,500,100,250) and not enteredCave:
+    elif arrivedOnIsland and isClicked(375,500,100,250) and not enteredCave and not batLeft:
       draw_caveEntrance(caveEntrance,2,2,0)
       print("you continue along your journey when you come across a cave you remember hearing that this cave may contain a monster that no other adventurer has been able to defeat, click on the stone closest to the cave to proceed")
       foundCave = True
@@ -329,6 +341,40 @@ while running:
       print("you open the door and see a box, click on it to investigate further")
       openedDoor = True
     if openedDoor and isClicked(200,300,300,420):
+      draw_roomWithMouse(roomWithMouse,2,2,0)
+      print("you enter the room and see a mouse scurrying along the floor, click on the mouse to continue")
+      sawMouse = True
+    if sawMouse and isClicked(100,200,375,450):
+      draw_bat(bat,2,2,0)
+      discoveredBat = True
+      print("you examine the mouse closer only to realize that it's actually a bat")
+      print("the bat is angered that it was assumed to be a mouse, it tries to engage in battle with you")
+      Monster.attack(Player)
+      fendOffBat = random.randint(1,3)
+      if fendOffBat == 2:
+        print("you manage to fend off the bat sucessfully \n the bat left behind something: \n", batLoot)
+        inventoryContents.append(loot)
+        print("your inventory now contains: \n" , inventoryContents)
+        batEncounterEnded = True
+      elif fendOffBat != 2:
+        print("you try to fend off the bat but it manages to attack you")
+        Monster.attack(Player)
+        fendOffBatAgain = random.randint(1,10)
+        batEncounterEnded = True
+        if fendOffBatAgain == 7:
+          print("you try to fend off the bat once again but it still manages to attack you")
+          Monster.attack(Player)
+          batEncounterEnded = True
+        elif fendOffBatAgain != 7:
+          print("you manage to fend off the bat sucessfully \n the bat left behind something: \n", batLoot)
+          inventoryContents.append(loot)
+          print("your inventory now contains: \n" , inventoryContents)
+          batEncounterEnded = True
+    if batEncounterEnded:
+      draw_holeInWall(holeInWall,2,2,0)
+      batLeft = True
+      print("the bat flies away and you notice a small and mysterious hole in the wall, click on the hole in the wall to continue")    
+    if batLeft and isClicked(250,310,90,200):
       print("test")
 if Player.hitPoints <= 0:
   time.sleep(4)

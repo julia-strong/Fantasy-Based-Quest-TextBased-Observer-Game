@@ -30,6 +30,9 @@ caveEntrance = pygame.image.load("caveEntrance.png").convert()
 startTunnel = pygame.image.load("startTunnel.png").convert()
 door = pygame.image.load("door.png").convert()
 openDoor = pygame.image.load("openDoor.png").convert()
+roomWithMouse = pygame.image.load("roomWithMouse.png").convert()
+bat = pygame.image.load("bat.png").convert()
+holeInWall = pygame.image.load("holeInWall.png").convert()
 pygame.display.set_caption("RPsG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 surface1 = pygame.Surface((display_width, display_height))
 def draw_image(image, x, y):
@@ -482,6 +485,69 @@ def draw_openDoor(openDoor, x, y, display_time):
   while running:
     screen.fill(0)
     screen.blit(scaled_openDoor, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def draw_roomWithMouse(roomWithMouse, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_roomWithMouse = pygame.transform.scale(
+      roomWithMouse, (roomWithMouse.get_width() // 1, roomWithMouse.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_roomWithMouse, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def draw_bat(bat, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_bat = pygame.transform.scale(
+      bat, (bat.get_width() // 1, bat.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_bat, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def draw_holeInWall(holeInWall, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_holeInWall = pygame.transform.scale(
+      holeInWall, (holeInWall.get_width() // 1, holeInWall.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_holeInWall, (x, y))
     pygame.display.flip()
 
     current_time = pygame.time.get_ticks()
