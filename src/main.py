@@ -45,6 +45,8 @@ from graphics import caveEntrance
 from graphics import draw_caveEntrance
 from graphics import startTunnel
 from graphics import draw_startTunnel
+from graphics import door
+from graphics import draw_door
 from Player import hitPoints
 from Player import level
 from Monster import loot
@@ -88,6 +90,7 @@ arrivedOnIsland = False
 piranha = False
 foundCave = False
 enteredCave = False
+sawDoor = False
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -315,6 +318,10 @@ while running:
       print("you make your way into the cave and down a set of stairs \n click on the creature at the end of the tunnel to continue")
       enteredCave = True
     elif enteredCave and isClicked(290,350,100,150):
+      draw_door(door,2,2,0)
+      print("you continue along the path, moving deeper and deeper into the cave until you come across a door, click on the doorknob to open the door")
+      sawDoor = True
+    if sawDoor and isClicked(285,340,260,340):
       print("test")
 if Player.hitPoints <= 0:
   time.sleep(4)
