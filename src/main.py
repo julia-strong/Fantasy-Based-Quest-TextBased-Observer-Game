@@ -105,6 +105,7 @@ sawMouse = False
 discoveredBat = False
 batEncounterEnded = False
 batLeft = False
+drankPotion = False
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -142,14 +143,14 @@ while running:
         inventory = True
         if inventory:
           print(inventoryContents)
-          print("click anywhere in the screen to continue")
+          print("click in the top left corner of the screen to continue")
       elif gamestart and not continueAdventure and isClicked(100,225,100,225) and not windowClicked and not continueFromCrab:
         print("Click on the path to continue")
         draw_Pathstart(pathstart,2,2,0)
         continueAdventure = True
         pathdrawn = True
         windowClicked = True
-      elif inventory and not continueAdventure and isClicked(0,500,0,500) and not continueFromCrab:
+      elif inventory and not continueAdventure and isClicked(0,100,0,100) and not continueFromCrab:
         print("Click on the path to continue")
         draw_Pathstart(pathstart,2,2,0)
         pathdrawn = True
@@ -250,7 +251,7 @@ while running:
       draw_boat(boat,2,2,0)  
       print("you see a bird in the sky \n click on the bird to investigate")   
       sawBird = True
-    if sawBird and isClicked(10,150,10,150) and not enteredCave:
+    if sawBird and isClicked(10,150,10,150) and not enteredCave and pathdrawn:
       draw_birdEncount(birdEncount,2,2,0)
       print("the bird flies over and lands on your boat")
       input3 = input("there is a risk the bird might attack, would you like to continue (y/n) \n")
@@ -288,7 +289,7 @@ while running:
         draw_boat(boat,2,2,0)
         print("the bird flies away \n click on the flag of the boat to continue")
         birdFlewAway = True
-    if birdFlewAway and isClicked(260,400,100,300) and not arrivedOnIsland and not batLeft:
+    if birdFlewAway and isClicked(260,400,100,300) and not arrivedOnIsland and not batLeft and not drankPotion:
       draw_findPotion(findPotion,2,2,0)
       input5 = input("you find a mysterious vile with a green liquid do you want to consume it? (y/n) \n")
       if input5.lower() == "n":
@@ -310,6 +311,7 @@ while running:
         if allergicToPotion != 50:
           potionSeen = True
           print("you drink the bottle and notice its effects working, as you flip the bottle over you see a lable stating 'health increasing potion' ")
+          drankPotion = True
           Player.hitPoints += 5
           print("your current health is now", Player.hitPoints)
           print("click on the bottom right corner of the screen to continue")
