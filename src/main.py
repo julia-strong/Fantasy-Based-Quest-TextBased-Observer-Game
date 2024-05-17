@@ -63,6 +63,10 @@ from graphics import noMouse
 from graphics import draw_noMouse
 from graphics import openBox
 from graphics import draw_openBox
+from graphics import caveExit
+from graphics import draw_caveExit
+from graphics import secondCrab
+from graphics import draw_secondCrab
 from Player import hitPoints
 from Player import level
 from Monster import loot
@@ -120,7 +124,11 @@ immune = False
 resistant = False
 fendOffDragon = False
 mouseGone = False
-openedBox = True
+openedBox = False
+leavingCave = False
+secCrab = False
+returnBoat = False
+returnPath = False
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -165,7 +173,7 @@ while running:
         continueAdventure = True
         pathdrawn = True
         windowClicked = True
-      elif inventory and not continueAdventure and isClicked(0,100,0,100) and not continueFromCrab:
+      elif inventory and not continueAdventure and isClicked(0,100,0,100) and not continueFromCrab and not secCrab:
         print("Click on the path to continue")
         draw_Pathstart(pathstart,2,2,0)
         pathdrawn = True
@@ -190,7 +198,7 @@ while running:
         print("you continue on your journey along the path when you reach a turn in the path and here growling around the corner \n click where the path turns the corner to continue")
         secPath = True
         secpathDrawn = True
-      elif secPath and isClicked(0,230,125,235) and secpathDrawn and not continueOntoBoat and not foundCave and not enteredCave:
+      elif secPath and isClicked(0,230,125,235) and secpathDrawn and not continueOntoBoat and not foundCave and not enteredCave and not returnPath:
         randEncount = random.randint(1,3)
         # print(randEncount)
         draw_secondPath(secondPath,2,2,0)
@@ -218,7 +226,7 @@ while running:
           clickedOnFirstCreature = False
           firstCreature = True
           randEncount = 4
-          if not clickedOnFirstCreature and firstCreature and isClicked(0,200,0,240):
+          if not clickedOnFirstCreature and firstCreature and isClicked(0,200,0,240) and not secCrab:
             continueAfterFirstEncount = True
             draw_noFirstEncount(noFirstEncount,2,2,0)
             print("click the sun in the top right portion of the screen to continue")
@@ -307,7 +315,7 @@ while running:
         draw_boat(boat,2,2,0)
         print("the bird flies away \n click on the flag of the boat to continue")
         birdFlewAway = True
-    if birdFlewAway and isClicked(260,400,100,300) and not arrivedOnIsland and not batLeft and not drankPotion:
+    if birdFlewAway and isClicked(260,400,100,300) and not arrivedOnIsland and not batLeft and not drankPotion and not returnBoat:
       draw_findPotion(findPotion,2,2,0)
       input5 = input("you find a mysterious vile with a green liquid do you want to consume it? (y/n) \n")
       if input5.lower() == "n":
@@ -465,24 +473,56 @@ while running:
             print("you are able to not lose as much health this time, and since you were more prepared for the attack, you manage to finally fend off the dragon")
             fendOffDragon = True
             print("click on the bottom left corner of the screen to continue")
-    if fendOffDragon and isClicked(0,100,400,500):
+    if fendOffDragon and isClicked(0,100,400,500) and not leavingCave:
       draw_noMouse(noMouse,2,2,0)
       print("you return back to the room where you saw the mouse, where you discover that it has left, click on the treasure chest to continue")
       mouseGone = True
-    elif mouseGone and isClicked(200,450,300,450):
+    elif mouseGone and isClicked(200,450,300,450) and not openedBox and not leavingCave:
       draw_openBox(openBox,2,2,0)
       input8 = input("you open the box and find it to be filled with a wide variety of objects, which of the following objects is not in the box? \n a) feather and quill \n b) 4 gold pieces/coins \n c) a bat tooth \n d) an apple core \n e) a snail \n f) a diamond \n g) a pocketwatch \n")
       if input8.lower() != "c":
         print("wrong! you answered", input8, "the correct answer was c) a bat tooth ")
         openedBox = True
+        print("click on the snail to continue")
       if input8.lower() == "c":
         print("correct! \n you grab the four gold pieces and add them to your inventory")
         inventoryContents.append("4 gold pieces")
         print("your inventory now contains: \n", inventoryContents)
         openedBox = True
-      print("click on the snail to continue")
-    elif openedBox and isClicked(350,475,275,400):
-      print("test")
+        print("click on the snail to continue")
+    if openedBox and isClicked(350,475,275,400) and not secCrab:
+      draw_caveExit(caveExit,2,2,0)
+      print("you make your way to the exit of the cave, click on the tree on the left side to continue")
+      leavingCave = True
+    if leavingCave and isClicked(0,150,240,390):
+      draw_secondCrab(secondCrab,2,2,0)
+      print("you continue along your journey when you come across another crab, you can either click on it and see what happens, or click on the sun to continue your journey")
+      secCrab = True
+    if secCrab and isClicked(425,500,300,400):
+      draw_image1(startImage,2,2,0)
+      print("you realize that the crab somehow teleported you back home, \n you won the game!")
+      print("your current health is \n", hitPoints)
+      print("you have ended the game with these items in your inventory \n", inventoryContents)
+      print("the end!")
+      time.sleep(5)
+      exit()
+    elif secCrab and isClicked(0,150,0,150):
+      draw_boat(boat, 2,2,0)
+      print("you get on the boat that you took to get to the island, and continue sailing smoothly, without running into any issues, and you do end up seeing the bird again, however it does not approach")
+      print("click on the flag of the boat to continue")
+      returnBoat = True
+    if returnBoat and isClicked(260,400,100,300) and not returnPath:
+      returnPath = True
+      draw_secondPath(secondPath,2,2,0)
+      print("you continue along your return trip when you come across the path where you heard the growling noise earlier, click on where the path turns the corner to continue returning home")
+    if returnPath and isClicked(0,230,125,235):
+      draw_image1(startImage,2,2,0)
+      print("you have made it home!")
+      print("your current health is \n", hitPoints)
+      print("you have ended the game with these items in your inventory \n", inventoryContents)
+      print("the end!")
+      time.sleep(5)
+      exit()
     if Player.hitPoints <= 0:
       print("You have run out of hit points! :( \n Game over!!!")
       time.sleep(1)
