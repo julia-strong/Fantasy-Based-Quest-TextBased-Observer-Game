@@ -24,6 +24,7 @@
 6. If these steps are followed correctly the app should run smoothly, and then just follow instructions of the app.
 ## UML Class Diagram:
 ![Class Diagram](https://github.com/julia-strong/Fantasy-Based-Quest-TextBased-Observer-Game/blob/main/images/ClassDiagramTwo.png?raw=True)
+![Class Diagram](https://github.com/julia-strong/Fantasy-Based-Quest-TextBased-Observer-Game/blob/main/images/ClassDiagramThree.drawio.png?raw=True)
 ## Mockups/ScreenShots:
 ![Mockup](https://github.com/julia-strong/RPG-Fantasy-Based-Clicker-and-TextBased-Game/blob/main/images/mockup1.png?raw=True)
 ![Start screen](https://github.com/julia-strong/RPG-Fantasy-Based-Clicker-and-TextBased-Game/blob/main/images/startScreen1.png?raw=True)
