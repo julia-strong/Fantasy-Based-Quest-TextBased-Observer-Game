@@ -55,6 +55,12 @@ from graphics import bat
 from graphics import draw_bat
 from graphics import holeInWall
 from graphics import draw_holeInWall
+from graphics import seeDragon
+from graphics import draw_seeDragon
+from graphics import dragonFace
+from graphics import draw_dragonFace
+from graphics import noMouse
+from graphics import draw_noMouse
 from Player import hitPoints
 from Player import level
 from Monster import loot
@@ -106,6 +112,12 @@ discoveredBat = False
 batEncounterEnded = False
 batLeft = False
 drankPotion = False
+sawDragon = False
+vulnerable = False
+immune = False
+resistant = False
+fendOffDragon = False
+mouseGone = False
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -192,6 +204,9 @@ while running:
             inventoryContents.append(loot)
             print("you collected things from the chicken \n your inventory now contains:\n")
             print(loot)
+            clickedOnFirstCreature = False
+            firstCreature = True
+            randEncount = 4
           else:
             print("wrong! :( \n you answered: \n" + input1 + "\n the correct answer was a) chicken \n")
             Player.hitPoints -= 5
@@ -210,12 +225,12 @@ while running:
           print("click on the sun in the upper right corner to continue")
           continueAfterFirstEncount = True
           randEncount = 4
-      if continueAfterFirstEncount and isClicked(375,500,0,225) and randEncount == 4 and not continueOntoBoat:
+      if continueAfterFirstEncount and isClicked(375,500,0,225) and randEncount == 4 and not continueOntoBoat and not sawDragon:
         draw_noFirstEncount(noFirstEncount,2,2,0)
         print("you continue on the journey")
         print("click on the sun in the upper right corner to continue")
         continueContinuing = True
-      if continueContinuing and isClicked (375,500,0,225) and not continueOntoBoat and not arrivedOnIsland:
+      if continueContinuing and isClicked (375,500,0,225) and not continueOntoBoat and not arrivedOnIsland and not sawDragon:
           draw_beachPath(beachPath,2,2,0)
           print("click on the crab to continue")
           beachDrawn = True
@@ -306,7 +321,7 @@ while running:
           piranha = True
       elif input5.lower() == "y" or piranha:
         allergicToPotion = random.randint(1,100)
-        input5 = " "
+        input5 = "y"
         # print(allergicToPotion)
         if allergicToPotion != 50:
           potionSeen = True
@@ -331,11 +346,11 @@ while running:
       draw_caveEntrance(caveEntrance,2,2,0)
       print("you continue along your journey when you come across a cave you remember hearing that this cave may contain a monster that no other adventurer has been able to defeat, click on the stone closest to the cave to proceed")
       foundCave = True
-    if foundCave and isClicked(220,360,290,350) and not enteredCave:
+    if foundCave and isClicked(220,360,290,350) and not enteredCave and not mouseGone:
       draw_startTunnel(startTunnel,2,2,0)
       print("you make your way into the cave and down a set of stairs \n click on the creature at the end of the tunnel to continue")
       enteredCave = True
-    elif enteredCave and isClicked(290,350,100,150) and not batLeft:
+    elif enteredCave and isClicked(290,350,100,150) and not batLeft and not mouseGone:
       draw_door(door,2,2,0)
       print("you continue along the path, moving deeper and deeper into the cave until you come across a door, click on the doorknob to open the door")
       sawDoor = True
@@ -343,11 +358,11 @@ while running:
       draw_openDoor(openDoor,2,2,0)
       print("you open the door and see a box, click on it to investigate further")
       openedDoor = True
-    if openedDoor and isClicked(200,300,300,420):
+    if openedDoor and isClicked(200,325,300,420) and not mouseGone:
       draw_roomWithMouse(roomWithMouse,2,2,0)
       print("you enter the room and see a mouse scurrying along the floor, click on the mouse to continue")
       sawMouse = True
-    if sawMouse and isClicked(100,200,375,450):
+    if sawMouse and isClicked(100,200,375,450) and not mouseGone:
       draw_bat(bat,2,2,0)
       discoveredBat = True
       print("you examine the mouse closer only to realize that it's actually a bat")
@@ -384,8 +399,75 @@ while running:
       batLeft = True
       print("the bat flies away and you notice a small and mysterious hole in the wall, click on the hole in the wall to continue")    
     if batLeft and isClicked(250,310,90,200):
+      draw_seeDragon(seeDragon,2,2,0)
+      print("you look into the hole in the wall and find a small dragon, click on the upper right corner of the screen to investiate")
+      sawDragon = True
+    if sawDragon and isClicked(400,500,0,100):
+      draw_dragonFace(dragonFace,2,2,0)
+      print("the dragon approaches you, and it attacks you with fire-breath")
+      dragonResult = random.randint(1,100)
+      if dragonResult == 30:
+        print("the dragon attacked you, but the damage is twice than what you expected, and you remember that you are vulnerable to dragon attacks and take twice the damage")
+        Monster.attack(Player)
+        Monster.attack(Player)
+        vulnerable = True
+        print("this lowers your health, your current health is now: \n", Player.hitPoints)
+      elif dragonResult == 10:
+        print("the dragon attacked you, but you don't feel any damage, and realize that you're immune to this dragon's attack")
+        immune = True
+      elif 40 < dragonResult > 50:
+        print("the dragon attacks you, but it doesn't do quite as much damage as you expected, and you realize that you're slightly resistant to the dragon's attack")
+        resistant = True
+        Player.hitPoints += 1 
+        Monster.attack(Player)
+      else:
+        Monster.attack(Player)
+      print("you realize that you can offer a sacrifice from your inventory to the dragon if you don't want to engage in battle with it")
+      input7 = input("type 's' to sacrifice an item from your inventory, or type 'b' to engage in battle with the dragon instead \n")
+      if input7.lower() == "s":
+        sacrifice = random.randint(1,len(inventoryContents))
+        del inventoryContents[sacrifice]
+        print("you sacrificed an item from your inventory, your inventory now contains: \n", inventoryContents)
+        fendOffDragon = True
+        print("click on the bottom left corner of the screen to continue")
+      elif input7.lower() == "b":
+        print("you engage in battle with the dragon")
+        if vulnerable:
+          Monster.attack(Player)
+          Monster.attack(Player)
+        elif immune:
+          print("the dragon tries to attack you but doesn't do any damage again")
+        elif resistant:
+          print("the dragon tries to attack you but doesn't do quite as much damage again")
+          Player.hitPoints += 1
+          Monster.attack(Player)
+        else:
+          Monster.attack(Player)
+        fendOffDragonFirst = random.randint(1,7)
+        if fendOffDragonFirst == 6:
+          print("you manage to sucessfully fend off the dragon, however you find that it didn't leave behind any treasure, although the cave is rumored to be filled with the dragon's treasure")
+          fendOffDragon = True
+          print("click on the bottom left corner of the screen to continue")
+        else:
+          Monster.attack(Player)
+          fendOffDragonSecond = random.randint(1,3)
+          if fendOffDragonSecond == 2:
+            print("you sucessfully manage to fend off the dragon after being attacked again, but it didn't seem to leave behind any loot, which you find odd considering the cave is rumored to be filled with the dragon's treasure")
+            fendOffDragon = True
+            print("click on the bottom left corner of the screen to continue")
+          elif fendOffDragonSecond != 2:
+            Player.hitPoints += 2
+            print("you have enough time to somewhat recover before the dragon attacks you again")
+            Monster.attack(Player)
+            print("you are able to not lose as much health this time, and since you were more prepared for the attack, you manage to finally fend off the dragon")
+            fendOffDragon = True
+            print("click on the bottom left corner of the screen to continue")
+    if fendOffDragon and isClicked(0,100,400,500):
+      draw_noMouse(noMouse,2,2,0)
+      print("you return back to the room where you saw the mouse, where you discover that it has left, click on the treasure chest to continue")
+      mouseGone = True
+    if mouseGone and isClicked(200,450,200,425):
       print("test")
-if Player.hitPoints <= 0:
-  time.sleep(4)
-  print("You have run out of hit points! :( \n Game over!!!")      
+    if Player.hitPoints <= 0:
+      print("You have run out of hit points! :( \n Game over!!!")      
       

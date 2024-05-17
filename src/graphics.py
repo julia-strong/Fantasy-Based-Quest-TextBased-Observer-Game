@@ -33,6 +33,9 @@ openDoor = pygame.image.load("openDoor.png").convert()
 roomWithMouse = pygame.image.load("roomWithMouse.png").convert()
 bat = pygame.image.load("bat.png").convert()
 holeInWall = pygame.image.load("holeInWall.png").convert()
+seeDragon = pygame.image.load("seeDragon.png").convert()
+dragonFace = pygame.image.load("dragonFace.png").convert()
+noMouse = pygame.image.load("noMouse.png").convert()
 pygame.display.set_caption("RPsG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 surface1 = pygame.Surface((display_width, display_height))
 def draw_image(image, x, y):
@@ -548,6 +551,69 @@ def draw_holeInWall(holeInWall, x, y, display_time):
   while running:
     screen.fill(0)
     screen.blit(scaled_holeInWall, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def draw_seeDragon(seeDragon, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_seeDragon = pygame.transform.scale(
+      seeDragon, (seeDragon.get_width() // 1, seeDragon.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_seeDragon, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def draw_dragonFace(dragonFace, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_dragonFace = pygame.transform.scale(
+      dragonFace, (dragonFace.get_width() // 1, dragonFace.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_dragonFace, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def draw_noMouse(noMouse, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_noMouse = pygame.transform.scale(
+      noMouse, (noMouse.get_width() // 1, noMouse.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_noMouse, (x, y))
     pygame.display.flip()
 
     current_time = pygame.time.get_ticks()
