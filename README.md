@@ -23,7 +23,6 @@
 5. Open terminal or command prompt should work as well (which can be found by pressing the windows key and typing terminal on a Windows computer), and type "cd Downloads", followed by "cd Fantasy-Based-Quest-TextBased-Observer-Game-main" (you can press tab after typing cd and a few letters of "Fantasy") then "cd src", and then type "python3 main.py" to run the app.
 6. If these steps are followed correctly the app should run smoothly, and then just follow instructions of the app.
 ## UML Class Diagram:
-![Class Diagram](https://github.com/julia-strong/Fantasy-Based-Quest-TextBased-Observer-Game/blob/main/images/ClassDiagramTwo.png?raw=True)
 ![Class Diagram](https://github.com/julia-strong/Fantasy-Based-Quest-TextBased-Observer-Game/blob/main/images/ClassDiagramThree.drawio.png?raw=True)
 ## Mockups/ScreenShots:
 ![Mockup](https://github.com/julia-strong/RPG-Fantasy-Based-Clicker-and-TextBased-Game/blob/main/images/mockup1.png?raw=True)
