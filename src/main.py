@@ -61,6 +61,8 @@ from graphics import dragonFace
 from graphics import draw_dragonFace
 from graphics import noMouse
 from graphics import draw_noMouse
+from graphics import openBox
+from graphics import draw_openBox
 from Player import hitPoints
 from Player import level
 from Monster import loot
@@ -118,6 +120,7 @@ immune = False
 resistant = False
 fendOffDragon = False
 mouseGone = False
+openedBox = True
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption(
     "RPG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
@@ -211,6 +214,7 @@ while running:
             print("wrong! :( \n you answered: \n" + input1 + "\n the correct answer was a) chicken \n")
             Player.hitPoints -= 5
             print("the chicken bit you \n -5 health \n your current health is now: \n" , Player.hitPoints)
+            print("click on the chicken's eyes to continue")
           clickedOnFirstCreature = False
           firstCreature = True
           randEncount = 4
@@ -235,7 +239,6 @@ while running:
           print("click on the crab to continue")
           beachDrawn = True
     if continueContinuing and beachDrawn and not crabClicked and isClicked(0,100,370,460) and not continueOntoBoat:
-      #  print("test")
       draw_CrabEncount(crabEncount,2,2,0)
       input2 = input("You have come across a crab! This encounter is optional, you have a chance of being attacked by the crab, but might be able to get loot from the crab if you take the risk. Will you take the risk? (y/n) \n")
       if input2.lower() =="n":
@@ -394,7 +397,7 @@ while running:
           batEncounterEnded = True
           print("click in the bottom right corner of the screen to continue")
           time.sleep(1)
-    if batEncounterEnded and isClicked(400,500,400,500):
+    if batEncounterEnded and isClicked(400,500,400,500) and not fendOffDragon:
       draw_holeInWall(holeInWall,2,2,0)
       batLeft = True
       print("the bat flies away and you notice a small and mysterious hole in the wall, click on the hole in the wall to continue")    
@@ -426,7 +429,7 @@ while running:
       input7 = input("type 's' to sacrifice an item from your inventory, or type 'b' to engage in battle with the dragon instead \n")
       if input7.lower() == "s":
         sacrifice = random.randint(1,len(inventoryContents))
-        del inventoryContents[sacrifice]
+        del inventoryContents[sacrifice-1]
         print("you sacrificed an item from your inventory, your inventory now contains: \n", inventoryContents)
         fendOffDragon = True
         print("click on the bottom left corner of the screen to continue")
@@ -466,8 +469,23 @@ while running:
       draw_noMouse(noMouse,2,2,0)
       print("you return back to the room where you saw the mouse, where you discover that it has left, click on the treasure chest to continue")
       mouseGone = True
-    if mouseGone and isClicked(200,450,200,425):
+    elif mouseGone and isClicked(200,450,300,450):
+      draw_openBox(openBox,2,2,0)
+      input8 = input("you open the box and find it to be filled with a wide variety of objects, which of the following objects is not in the box? \n a) feather and quill \n b) 4 gold pieces/coins \n c) a bat tooth \n d) an apple core \n e) a snail \n f) a diamond \n g) a pocketwatch \n")
+      if input8.lower() != "c":
+        print("wrong! you answered", input8, "the correct answer was c) a bat tooth ")
+        openedBox = True
+      if input8.lower() == "c":
+        print("correct! \n you grab the four gold pieces and add them to your inventory")
+        inventoryContents.append("4 gold pieces")
+        print("your inventory now contains: \n", inventoryContents)
+        openedBox = True
+      print("click on the snail to continue")
+    elif openedBox and isClicked(350,475,275,400):
       print("test")
     if Player.hitPoints <= 0:
-      print("You have run out of hit points! :( \n Game over!!!")      
+      print("You have run out of hit points! :( \n Game over!!!")
+      time.sleep(1)
+      exit()
+          
       

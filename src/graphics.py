@@ -36,6 +36,7 @@ holeInWall = pygame.image.load("holeInWall.png").convert()
 seeDragon = pygame.image.load("seeDragon.png").convert()
 dragonFace = pygame.image.load("dragonFace.png").convert()
 noMouse = pygame.image.load("noMouse.png").convert()
+openBox = pygame.image.load("openBox.png").convert()
 pygame.display.set_caption("RPsG Fantasy Game with Text-Based, Graphic, and Clicker Elements")
 surface1 = pygame.Surface((display_width, display_height))
 def draw_image(image, x, y):
@@ -614,6 +615,27 @@ def draw_noMouse(noMouse, x, y, display_time):
   while running:
     screen.fill(0)
     screen.blit(scaled_noMouse, (x, y))
+    pygame.display.flip()
+
+    current_time = pygame.time.get_ticks()
+    if current_time - start_time >= display_time:
+      #screen.fill(0)
+      running = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+def draw_openBox(openBox, x, y, display_time):
+  running = True
+  display_width = 500
+  display_height = 500
+  screen = pygame.display.set_mode((display_width, display_height))
+  start_time = pygame.time.get_ticks()
+  scaled_openBox = pygame.transform.scale(
+      openBox, (openBox.get_width() // 1, openBox.get_height() // 1))
+  while running:
+    screen.fill(0)
+    screen.blit(scaled_openBox, (x, y))
     pygame.display.flip()
 
     current_time = pygame.time.get_ticks()
